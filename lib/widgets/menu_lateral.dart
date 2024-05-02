@@ -15,7 +15,7 @@ class menuLateral extends StatelessWidget {
             width: double.infinity,
             child: DrawerHeader(
               decoration: BoxDecoration(color: Colors.green),
-              child: Text('Pepito',
+              child: Text('Opciones',
                style: TextStyle(fontSize: 40,color: Colors.black),)),
             ),
           Expanded(

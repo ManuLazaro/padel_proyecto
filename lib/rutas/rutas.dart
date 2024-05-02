@@ -4,8 +4,10 @@ import 'package:padel_proyecto/paginas/pagina_principal.dart';
 import 'package:padel_proyecto/paginas/paginas_mis_reservas.dart';
 
 List menuOptions =<_ruta>[
-  _ruta(Icons.access_time_filled_sharp, 'pistas', PaginaPistas()),
-  _ruta(Icons.abc, 'mis reservas', PaginasMisReservas()),
+  _ruta(Icons.person, 'Perfil', PaginaPistas()),
+  _ruta(Icons.settings, 'Configuracion', PaginasMisReservas()),
+  _ruta(Icons.dark_mode, 'Modo oscuro', PaginasMisReservas()),
+  _ruta(Icons.help, 'Ayuda', PaginasMisReservas()),
 ];
 class _ruta {
   final IconData icono;
