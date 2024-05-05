@@ -15,6 +15,8 @@ class PaginaCrearGestor extends StatefulWidget {
 }
 
 class _PaginaCrearGestorState extends State<PaginaCrearGestor> {
+  String botonRegistro = 'Registrarse ahora';
+  Color colorVerde = Color.fromARGB(255, 29, 88, 29);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +50,7 @@ class _PaginaCrearGestorState extends State<PaginaCrearGestor> {
             TextField(obscureText: true),
             SizedBox(height: 20.0),
             TextField(obscureText: true),
-            botonLargo(),
+            botonLargo(nombre: botonRegistro,color: colorVerde,),
           ],
         ),
       ),

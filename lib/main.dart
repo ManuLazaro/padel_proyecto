@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:padel_proyecto/paginas/pagina_principal.dart';
 
 import 'paginas/pagina_crear_gestor.dart';
+import 'paginas/pagina_inicio_sesion.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
       ),
-      home: const PaginaCrearGestor(),
+      home: const PaginaInicioSesion(),
     );
   }
 }

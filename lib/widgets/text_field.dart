@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 
 
 class textField extends StatelessWidget {
-  const textField({
+  const textField(String nombre, {
     super.key,
+    required this.texto, //Lo que va escrito sobre el textField
+    this.ocultarTexto = false, // Para contraseñas
   });
+  final String texto;
+  final bool ocultarTexto;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +21,9 @@ class textField extends StatelessWidget {
        ),
        child: TextField( 
          style: TextStyle(color: Colors.black),
+         obscureText: ocultarTexto,
          decoration: InputDecoration(
-           hintText: 'Nombre',
+           hintText: texto,
            hintStyle: TextStyle(color: Colors.white),
            contentPadding: EdgeInsets.all(10.0),
            border: InputBorder.none,

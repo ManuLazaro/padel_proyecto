@@ -73,6 +73,9 @@ class cuadroPistas extends StatelessWidget {
   }
 }
 
+//////////////////////////////////////////
+//cuadro con la informacion de la pista //
+//////////////////////////////////////////
 class cuadroInformacionPista extends StatelessWidget {
   const cuadroInformacionPista({
     super.key,
@@ -221,6 +224,10 @@ class cuadroInformacionPista extends StatelessWidget {
 //   }
 // }
 
+
+/////////////////////////////////////////////////////
+// Cuado con los Circulos marcados o no marcados  //
+////////////////////////////////////////////////////
 class _huecosDisponibles extends StatelessWidget {
   const _huecosDisponibles({
     super.key,
@@ -251,7 +258,6 @@ class _huecosDisponibles extends StatelessWidget {
       );
   }
 }
-
 
 class _circuloMarcado extends StatelessWidget {
   const _circuloMarcado({

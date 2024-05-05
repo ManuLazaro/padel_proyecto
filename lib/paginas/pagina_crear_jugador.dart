@@ -13,6 +13,8 @@ class PaginaCrearJugador extends StatefulWidget {
 class _PaginaCrearJugadorState extends State<PaginaCrearJugador> {
    @override
   Widget build(BuildContext context) {
+    String botonInicio = 'Iniciar sesion';
+    Color colorVerde = Color.fromARGB(255, 29, 88, 29);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -44,7 +46,7 @@ class _PaginaCrearJugadorState extends State<PaginaCrearJugador> {
             TextField(obscureText: true),
             SizedBox(height: 20.0),
             TextField(obscureText: true),
-            botonLargo(),
+            botonLargo(nombre: botonInicio, color: colorVerde,),
           ],
         ),
       ),
