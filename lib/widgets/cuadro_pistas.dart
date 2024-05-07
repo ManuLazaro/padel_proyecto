@@ -114,7 +114,7 @@ class cuadroPistas extends StatelessWidget {
 
 
 /////////////////////////////////////////////////////
-// Cuado con los Circulos marcados o no marcados  //
+// Cuadro con los Circulos marcados o no marcados  //
 ////////////////////////////////////////////////////
 class _huecosDisponibles extends StatelessWidget {
   const _huecosDisponibles({
@@ -323,6 +323,106 @@ class cuadroPistasHistorial extends StatelessWidget {
                 
                       ],
                     ),
+        ),
+      
+      ],
+    );
+  }
+}
+
+
+
+//////////////////////////////
+// Cuadro para jugadores   //
+/////////////////////////////
+class cuadroJugadores extends StatelessWidget {
+  const cuadroJugadores({
+    Key? key,
+    required this.nombre,
+    required this.nivel,
+    required this.partidos,
+  }) : super(key: key);
+  final String nombre;
+  final String nivel;
+  final int partidos;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        // CONTENEDOR PARA EL COLOR DE FONDO
+        Container(
+          margin: EdgeInsets.symmetric(vertical: 0, horizontal: 4.0), 
+          height: 110,
+          decoration: BoxDecoration(
+            color: Color.fromARGB(255, 255, 255, 255),
+            borderRadius: BorderRadius.circular(5.0), // Bordes redondos
+            boxShadow: const [
+              BoxShadow(
+                color: Color.fromARGB(255, 108, 114, 108), 
+                blurRadius: 2.0, 
+                offset: Offset(1, 2), // Sombra por un lado y por abajo
+              ),
+            ],
+          ),
+        ),
+         // Raqueta de fondo
+        Positioned(
+          top: 0.0,
+          right: 310.0,
+          child: Opacity(
+            opacity: 0.1,
+            child: Icon(
+              Icons.sports_tennis,
+              size: 120.0,
+              color: Colors.green,
+            ),
+          ),
+        ),
+        // CONTENEDOR CON LA LOGICA
+        Container(
+          padding: EdgeInsets.all(6.0), // Sirve para dar espacio por dentro 
+          margin: EdgeInsets.symmetric(vertical: 2.0, horizontal: 4.0), 
+          height: 110,
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(5.0), // Bordes redondos
+          ),
+          child: Row(   
+            children: [
+              Expanded(
+                child: StreamBuilder<Object>(
+                  stream: null,
+                  builder: (context, snapshot) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.center, // lo coloca en el centro
+                      children: [
+                        Text(nombre),
+                        SizedBox(height: 10),
+                        Text(nivel),
+                        SizedBox(height: 10),
+                        Text('${partidos.toString()} partidos jugados'), // juntar la varibale con el texto que aparecera a su lado
+                  
+                      ],
+                    );
+                  }
+                ),
+              ),        
+              SizedBox(width: 130),
+              Container(
+                width: 1,
+                margin: EdgeInsets.only(right: 8.0),
+                decoration: BoxDecoration(
+                  color: Colors.black
+                ),
+              ),
+              SizedBox(width: 9),
+              Container(
+                margin: EdgeInsets.only(right: 8.0), // Margen agregado solo en la parte izquierda
+                child:  Icon(Icons.person_sharp, size: 75.0), 
+                ),
+              ],
+             ),
         ),
       
       ],

@@ -5,6 +5,7 @@ import 'paginas/pagina_crear_gestor.dart';
 import 'paginas/pagina_crear_jugador.dart';
 import 'paginas/pagina_eleccion.dart';
 import 'paginas/pagina_historial.dart';
+import 'paginas/pagina_info_pistas.dart';
 import 'paginas/pagina_inicio_sesion.dart';
 import 'paginas/paginas_mis_reservas.dart';
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
       ),
-      home: const PaginaPistasHistorial(),
+      home: const PaginaPrincipal(),
     );
   }
 }
