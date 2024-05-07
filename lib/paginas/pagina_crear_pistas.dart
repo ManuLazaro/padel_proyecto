@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:padel_proyecto/modelos/pista_nueva.dart';
+import 'package:flutter/widgets.dart';
+import 'package:padel_proyecto/modelos/pista.dart';
+
 
 import '../widgets/barra_navegacion.dart';
 import '../widgets/boton_largo.dart';
@@ -19,8 +21,10 @@ class _PaginaCrearPistasState extends State<PaginaCrearPistas> {
   String botonRegistro = 'Crear pista';
   Color colorVerde = Color.fromARGB(255, 29, 88, 29);
   String texto= "";
+  final _formkey=GlobalKey<FormState>();
+  Pista nuevaPista=Pista();
 
-  PistaNueva crearPista = new PistaNueva();
+  // Pista crearPista = new Pista();
 
   @override
 Widget build(BuildContext context) {
@@ -41,29 +45,81 @@ Widget build(BuildContext context) {
     body: Container(
       color: Color.fromARGB(255, 77, 185, 69),
       padding: EdgeInsets.all(20.0),
-      child: ListView( // PRIMER LISTVIEW CON EL BOTON
-        children: [
-          SizedBox(
-            height: 575.0, // PAra la altura del ListView
-            child: ListView( // SEGUNDO LISTVIEW CON LOS TEXTFIELD
-              children: [
-                PistaPadel(),
-                SizedBox(height: 30.0),
-                textField(texto, texto: 'Direccion',),
-                SizedBox(height: 20.0),
-                textField(texto, texto: 'Fecha',),
-                SizedBox(height: 20.0),
-                textField(texto, texto: 'Hora',),
-                SizedBox(height: 20.0),
-                textField(texto, texto: 'Pista',),
-                SizedBox(height: 20.0),
-                textField(texto, texto: 'Precio por persona',),
-              ],
+      child: Form(
+        key: _formkey,
+        child: Column( // PRIMER LISTVIEW CON EL BOTON
+          children: [
+            PistaPadel(),
+            Expanded(
+              child: ListView( // SEGUNDO LISTVIEW CON LOS TEXTFIELD
+                children: [
+                  SizedBox(height: 30.0),
+                  TextFormField(
+                    decoration: InputDecoration(
+                    label: Text('Direccion',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),),
+                    hintStyle: TextStyle(color: Colors.white),
+                    contentPadding: EdgeInsets.all(10.0),
+                    border: InputBorder.none,
+                    ),
+                    validator: (value) {
+                      if((value==null)||(value.isEmpty))
+                      {
+                        return "La direccion no puede estar vacia";
+                      }
+                      else
+                      {
+                        return null;
+                      }
+                    },
+                    onSaved: (value) {
+                      if(value!=null)
+                      {
+                        nuevaPista.direccion=value;
+                      }
+                    },
+                  ),
+                  textField(texto: 'Direccion',),
+                  SizedBox(height: 20.0),
+                  textField( texto: 'Fecha',),
+                  SizedBox(height: 20.0),
+                  textField( texto: 'Hora',),
+                  SizedBox(height: 20.0),
+                  textField( texto: 'Pista',),
+                  SizedBox(height: 20.0),
+                  textField( texto: 'Precio por persona',),
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 10.0), // Espacio entre la ListView y el botón
-          botonLargo(nombre: botonRegistro, color: colorVerde,), // Botón fuera de la ListView
-        ],
+            SizedBox(height: 10.0), // Espacio entre la ListView y el botón
+            ElevatedButton( // boton estandar de la aplicacion
+              onPressed: () {
+                if(_formkey.currentState!.validate())
+                {
+                    _formkey.currentState!.save();
+                    //insertar en base de datos
+                    print(nuevaPista.direccion);
+                    //retornar con pop a la pantalla anterior
+                }
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: colorVerde, 
+                shape: RoundedRectangleBorder( // forma de rectangulo
+                  borderRadius: BorderRadius.circular(5.0), 
+                ),
+              ),
+              child: SizedBox( // una caja dentro para darle forma
+                width: double.infinity,// ocuoa todo lo ancho
+                child: Text(
+                  botonRegistro,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+                          ) // Botón fuera de la ListView
+          ],
+        ),
       ),
     ),
   //  bottomNavigationBar: barraNavegacion(),

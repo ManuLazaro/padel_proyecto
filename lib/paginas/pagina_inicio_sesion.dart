@@ -15,7 +15,6 @@ class PaginaInicioSesion extends StatefulWidget {
 class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
   @override
   Widget build(BuildContext context) {
-    String texto = 'Usuario';
     String botonInicio = 'Iniciar Sesión';
     String botonRegistro = '¿No tienes cuenta? Regístrate';
     Color colorVerde = Color.fromARGB(255, 4, 31, 4);
@@ -58,11 +57,11 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                    children: [
-                      textField(texto, texto: 'Usuario',),
+                      textField(texto: 'Usuario',),
                       SizedBox(height: 10.0),
-                      textField(texto, texto: 'Contraseña',ocultarTexto: true),
+                      textField(texto: 'Contraseña',ocultarTexto: true),
                       SizedBox(height: 10.0),
-                      textField(texto, texto: 'Repetir Contraseña',ocultarTexto: true),
+                      textField(texto: 'Repetir Contraseña',ocultarTexto: true),
                       SizedBox(height: 20.0),
                       botonLargo(nombre: botonInicio, color: colorVerde,),
                       SizedBox(height: 10.0),

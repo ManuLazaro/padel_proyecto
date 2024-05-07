@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 class cuadroPistas extends StatelessWidget {
   const cuadroPistas({
@@ -206,8 +208,6 @@ class _circuloNoMarcado extends StatelessWidget {
     );
   }
 }
-
-
 //////////////////////////////
 // Cuadro para historial   //
 /////////////////////////////
@@ -231,48 +231,9 @@ class cuadroPistasHistorial extends StatelessWidget {
     return Stack(
       children: [
         // CONTENEDOR PARA EL COLOR DE FONDO
-        Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0), 
-          height: 110,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 255, 255, 255),
-            borderRadius: BorderRadius.circular(5.0), // Bordes redondos
-            boxShadow: const [
-              BoxShadow(
-                color: Color.fromARGB(255, 108, 114, 108), 
-                blurRadius: 2.0, 
-                offset: Offset(1, 2), // Sombra por un lado y por abajo
-              ),
-            ],
-            border: BorderDirectional( // borde de color solo en el lado derecho
-              end: BorderSide(
-                color:(ocupados!=4)? Colors.green:Colors.black,
-                width: 5.0, 
-              ),
-            ),
-            gradient: LinearGradient( // Degradado de color rojo
-              begin: Alignment.topCenter,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromARGB(255, 255, 255, 255),
-                Colors.red.withOpacity(0.6), 
-              ],
-            )
-          ),
-        ),
+        _fondoHistorial(ocupados: ocupados),
          // Raqueta de fondo
-        Positioned(
-          top: 30.0,
-          right: 310.0,
-          child: Opacity(
-            opacity: 0.1,
-            child: Icon(
-              Icons.sports_tennis,
-              size: 120.0,
-              color: Colors.green,
-            ),
-          ),
-        ),
+       
         // CONTENEDOR CON LA LOGICA
         Container(
           padding: EdgeInsets.all(6.0), // Sirve para dar espacio por dentro 
@@ -299,7 +260,7 @@ class cuadroPistasHistorial extends StatelessWidget {
                       children: [
                         Text(centro),
                         Text(lugar),
-                        SizedBox(height: 30),
+                        SizedBox(height: 10),
                         Text(hora),
                       ],
                     );
@@ -326,6 +287,103 @@ class cuadroPistasHistorial extends StatelessWidget {
         ),
       
       ],
+    );
+  }
+}
+
+class _fondoHistorial extends StatelessWidget {
+  const _fondoHistorial({
+    super.key,
+    required this.ocupados,
+  });
+
+  final int ocupados;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0), 
+      height: 110,
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.circular(5.0), // Bordes redondos
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromARGB(255, 108, 114, 108), 
+            blurRadius: 2.0, 
+            offset: Offset(1, 2), // Sombra por un lado y por abajo
+          ),
+        ],
+        border: BorderDirectional( // borde de color solo en el lado derecho
+          end: BorderSide(
+            color:(ocupados!=4)? Colors.green:Colors.black,
+            width: 5.0, 
+          ),
+        ),
+        gradient: LinearGradient( // Degradado de color rojo
+          begin: Alignment.topCenter,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromARGB(255, 255, 255, 255),
+            Colors.red.withOpacity(0.6), 
+          ],
+        )
+      ),
+      child: Stack(
+        children: [
+          Positioned(
+            right: 290,
+            top: 10,
+            child: Icon(
+              Icons.sports_tennis,
+              size: 120.0,
+              color: Colors.green.withOpacity(0.15),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+class _fondo extends StatelessWidget {
+  const _fondo({
+    super.key,
+    required this.ocupados,
+  });
+
+  final int ocupados;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0), 
+      height: 110,
+      decoration: BoxDecoration(
+        color: Color.fromARGB(255, 255, 255, 255),
+        borderRadius: BorderRadius.circular(5.0), // Bordes redondos
+        boxShadow: const [
+          BoxShadow(
+            color: Color.fromARGB(255, 108, 114, 108), 
+            blurRadius: 2.0, 
+            offset: Offset(1, 2), // Sombra por un lado y por abajo
+          ),
+        ],
+        border: BorderDirectional( // borde de color solo en el lado derecho
+          end: BorderSide(
+            color:(ocupados!=4)? Colors.green:Colors.black,
+            width: 5.0, 
+          ),
+        ),
+        gradient: LinearGradient( // Degradado de color rojo
+          begin: Alignment.topCenter,
+          end: Alignment.bottomRight,
+          colors: [
+            Color.fromARGB(255, 255, 255, 255),
+            Colors.red.withOpacity(0.6), 
+          ],
+        )
+      ),
     );
   }
 }
