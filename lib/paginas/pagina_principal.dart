@@ -24,7 +24,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'PADEL', 
+          'PISTAS DISPONIBLES', 
           style: TextStyle(
             color: const Color.fromARGB(255, 255, 255, 255),
           ),
@@ -38,26 +38,22 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
       drawer: menuLateral(), 
       body: ListView(
         children: [
-          cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4,),
-          //_cuadroPistas(),
-         cuadroInformacionPista(),
-          Positioned( // Posicion del boton de arriba a la derecha
-            top: 6.0, 
-            right: 10.0, 
-            child: SizedBox( // envuelto en una caja para darle tamaño
+          Container(  
+            padding: EdgeInsets.only(top: 6.0,left: 370.0), 
+            child: SizedBox( 
               width: 22.0, 
               height: 22.0, 
               child: FloatingActionButton( // boton flotante pequeño
                 onPressed: () {
-
                 },
                 child: Icon(Icons.swap_vert, size: 20,), 
                 backgroundColor: Color.fromARGB(255, 77, 185, 69), 
                 shape: CircleBorder(), // Forma de circulo
-                
+  
               ),
             ),
           ),
+          cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4,),
         ],
       ),
       floatingActionButton: FloatingActionButton( // boton flotante grande

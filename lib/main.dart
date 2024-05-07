@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:padel_proyecto/paginas/pagina_principal.dart';
 
 import 'paginas/pagina_crear_gestor.dart';
+import 'paginas/pagina_crear_jugador.dart';
+import 'paginas/pagina_eleccion.dart';
+import 'paginas/pagina_historial.dart';
 import 'paginas/pagina_inicio_sesion.dart';
+import 'paginas/paginas_mis_reservas.dart';
 
 
 void main() {
@@ -19,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
       ),
-      home: const PaginaInicioSesion(),
+      home: const PaginaPistasHistorial(),
     );
   }
 }

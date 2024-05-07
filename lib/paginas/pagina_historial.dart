@@ -4,15 +4,15 @@ import '../widgets/barra_navegacion.dart';
 import '../widgets/cuadro_pistas.dart';
 import '../widgets/menu_lateral.dart';
 
-class PaginasMisReservas extends StatefulWidget {
-  const PaginasMisReservas({super.key});
+class PaginaPistasHistorial extends StatefulWidget {
+  const PaginaPistasHistorial({super.key});
 
   @override
-  State<PaginasMisReservas> createState() => _PaginasMisReservasState();
+  State<PaginaPistasHistorial> createState() => _PaginaPistasHistorialState();
 }
 
 
-class _PaginasMisReservasState extends State<PaginasMisReservas> {
+class _PaginaPistasHistorialState extends State<PaginaPistasHistorial> {
   @override
   Widget build(BuildContext context) {
     String centro = 'Padel centro de valladolid';
@@ -23,7 +23,7 @@ class _PaginasMisReservasState extends State<PaginasMisReservas> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'MIS RESERVAS', 
+          'HISTORIAL', 
           style: TextStyle(
             color: const Color.fromARGB(255, 255, 255, 255),
           ),
@@ -52,7 +52,7 @@ class _PaginasMisReservasState extends State<PaginasMisReservas> {
               ),
             ),
           ),
-          cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4,),
+          cuadroPistasHistorial(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4,),
         ],
       ),
       floatingActionButton: FloatingActionButton( // boton flotante grande
