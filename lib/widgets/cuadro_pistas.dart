@@ -487,3 +487,89 @@ class cuadroJugadores extends StatelessWidget {
     );
   }
 }
+
+
+
+///////////////////////////////////////////
+// Cuadro para informacion de la pista   //
+///////////////////////////////////////////
+class cuadroInformacionPista extends StatelessWidget {
+  const cuadroInformacionPista({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+    padding: EdgeInsets.all(6.0), // Sirve para dar espacio por dentro 
+    margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0), 
+    height: 110,
+    decoration: BoxDecoration(
+      color: Color.fromARGB(255, 255, 255, 255),
+      borderRadius: BorderRadius.circular(5.0), // Bordes redondos
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromARGB(255, 108, 114, 108), 
+          blurRadius: 2.0, 
+          offset: Offset(1, 2), // Sombra por un lado y por abajo
+        ),
+      ],
+      border: const BorderDirectional( // borde solo en el lado derecho
+        end: BorderSide(
+          color: Colors.green,
+          width: 5.0, 
+        ),
+      ),
+    ),
+        child: const Column(
+          children: [
+            SizedBox(height: 10),
+            Row( // fila 1
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('30/12/2024'),
+                      SizedBox(width: 20),
+                      Text('12:00 - 13:00 '),
+                      SizedBox(width: 20),
+                      Text('Centro de Padel Valladolid'),
+                      
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Padding(// Fila 3 en un padding para poner margen a la izquierda
+              padding: EdgeInsets.only(left: 23), 
+              child: Row( // fila 2
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Icon(Icons.person, size: 35, color: Color.fromARGB(255, 77, 185, 69)),
+                  SizedBox(width: 10),
+                  Icon(Icons.person, size: 35, color: Color.fromARGB(255, 58, 49, 49),),
+                  SizedBox(width: 50),
+                  Text('Nivel amateur'),
+                ],
+              ),
+            ),
+            Padding( // Fila 3 en un padding para poner margen a la izquierda
+              padding: EdgeInsets.only(left: 35), 
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('2  '),
+                  SizedBox(width: 20),
+                  Text('   2'),
+                ],
+              ),
+            ),
+          ],
+        ),
+    
+    
+      );
+  }
+}

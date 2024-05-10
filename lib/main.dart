@@ -3,6 +3,7 @@ import 'package:padel_proyecto/paginas/pagina_principal.dart';
 
 import 'paginas/pagina_crear_gestor.dart';
 import 'paginas/pagina_crear_jugador.dart';
+import 'paginas/pagina_crear_pistas.dart';
 import 'paginas/pagina_eleccion.dart';
 import 'paginas/pagina_historial.dart';
 import 'paginas/pagina_info_pistas.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
       ),
-      home: const PaginaPrincipal(),
+      home: const PaginasMisReservas(),
     );
   }
 }

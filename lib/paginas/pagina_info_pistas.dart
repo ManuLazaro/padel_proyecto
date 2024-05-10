@@ -57,7 +57,7 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
               ),
             ),
           ),
-          cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4,),
+          cuadroInformacionPista(),
           cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos)
         ],
       ),
