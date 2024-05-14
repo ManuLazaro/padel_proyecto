@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:padel_proyecto/paginas/pagina_principal.dart';
+import 'package:padel_proyecto/provider/datos_usuario.dart';
+import 'package:provider/provider.dart';
 
 import 'paginas/pagina_crear_gestor.dart';
 import 'paginas/pagina_crear_jugador.dart';
@@ -12,7 +14,15 @@ import 'paginas/paginas_mis_reservas.dart';
 
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers:[ 
+        ChangeNotifierProvider(
+        create:(_) => DatosUsuario()),
+      ],
+      child: const MyApp(),
+    )
+    );
 }
 
 class MyApp extends StatelessWidget {
@@ -21,14 +31,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final datosUsuario = Provider.of<DatosUsuario>(context);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
       ),
-      home: const PaginasInfoPistas(),
+      home: const PaginaInicioSesion(),
     );
   }
 }
-// Modelos: Jugador, gestor, con cual te registras?
-// formulario va raro (se borran cosas)
-// NavigationBar: no funciona

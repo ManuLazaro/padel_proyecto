@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:padel_proyecto/provider/datos_usuario.dart';
 import 'package:padel_proyecto/rutas/rutas.dart';
 import 'package:padel_proyecto/widgets/cuadro_pistas.dart';
 import 'package:padel_proyecto/widgets/menu_lateral.dart';
 import 'package:padel_proyecto/widgets/barra_navegacion.dart';
+import 'package:provider/provider.dart';
 class PaginasInfoPistas extends StatefulWidget {
   const PaginasInfoPistas({super.key});
 
@@ -16,12 +18,13 @@ class PaginasInfoPistas extends StatefulWidget {
 class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
   @override
   Widget build(BuildContext context) {
+    final datos= Provider.of<DatosUsuario>(context);
     String centro = 'Padel centro de valladolid';
     String lugar = 'Calle alguna de algo';
     String fecha = '12/12/2025';
     String hora = '12:00 - 13:00 ';
 
-    String nombre = 'Pepito Algo Gonzalez';
+    String nombre = datos.usuarioActual.nombre;
     String nivel = 'Nivel amateur';
     int partidos = 23;
 
@@ -47,7 +50,7 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
         ],
         
       ),
-      bottomNavigationBar: barraNavegacion(key: UniqueKey(),),
+      
       backgroundColor: Color.fromARGB(255, 203, 216, 203),
     );
   }

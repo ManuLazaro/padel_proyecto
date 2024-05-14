@@ -6,5 +6,5 @@ class Jugador {
   String fechaDeNacimiento="";
   String nivel="";
   String password="";
-  String password2="";
+ 
 }

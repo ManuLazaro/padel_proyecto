@@ -96,7 +96,7 @@ class _PaginaPistasHistorialState extends State<PaginaPistasHistorial> {
         ],
       ),
       
-      bottomNavigationBar: barraNavegacion(key: UniqueKey(),),
+      bottomNavigationBar: BarraNavegacion(key: UniqueKey(),selectedIndex: 2,),
       backgroundColor: Color.fromARGB(255, 203, 216, 203),
     );
   }

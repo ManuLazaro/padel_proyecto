@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:padel_proyecto/paginas/pagina_crear_pistas.dart';
+import 'package:padel_proyecto/paginas/pagina_info_pistas.dart';
 import 'package:padel_proyecto/rutas/rutas.dart';
 import 'package:padel_proyecto/widgets/cuadro_pistas.dart';
 import 'package:padel_proyecto/widgets/menu_lateral.dart';
@@ -45,6 +46,12 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
+                         Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PaginasInfoPistas(),
+                          ),
+                    );
                       },
                       child: Text('Fecha', style: TextStyle(fontSize: 15, color: Colors.white)),
                       style: ElevatedButton.styleFrom(
@@ -104,7 +111,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
         }, 
         child: Icon(Icons.add),
       ),
-      bottomNavigationBar: barraNavegacion(key: UniqueKey()),
+      bottomNavigationBar: BarraNavegacion(key: UniqueKey(),selectedIndex:0),
       backgroundColor: Color.fromARGB(255, 203, 216, 203),
     );
   }

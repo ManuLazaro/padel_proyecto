@@ -124,7 +124,7 @@ class _PaginasMisReservasState extends State<PaginasMisReservas> {
         child: Icon(Icons.add), 
         backgroundColor: Color.fromARGB(255, 77, 185, 69), 
       ),
-      bottomNavigationBar: barraNavegacion(key: UniqueKey(),),
+      bottomNavigationBar: BarraNavegacion(key: UniqueKey(),selectedIndex: 1,),
       backgroundColor: Color.fromARGB(255, 203, 216, 203),
     );
   }

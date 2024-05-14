@@ -251,16 +251,17 @@ Widget build(BuildContext context) {
                         return "La contraseña no puede estar vacia";
                       }
                       else
+                      if(nuevoJugador.password!= value)
+                      {
+                        return "Las contraseñas no son iguales";
+                        
+                      }
+                      else
                       {
                         return null;
                       }
                     },
-                    onSaved: (value) {
-                      if(value!=null)
-                      {
-                        nuevoJugador.password2=value;
-                      }
-                    },
+                
                   ),
                 ],
               ),
