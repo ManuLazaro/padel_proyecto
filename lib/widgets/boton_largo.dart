@@ -30,6 +30,6 @@ class botonLargo extends StatelessWidget {
          ),
        ),
      ),
-                );
+   );
   }
 }

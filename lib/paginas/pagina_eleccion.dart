@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../widgets/boton_largo.dart';
 import '../widgets/logo.dart';
 import '../widgets/text_field.dart';
+import 'pagina_crear_jugador.dart';
 
 class PaginaEleccion extends StatefulWidget {
   const PaginaEleccion({Key? key}) : super(key: key);
@@ -15,10 +16,7 @@ class PaginaEleccion extends StatefulWidget {
 class _PaginaEleccionState extends State<PaginaEleccion> {
   @override
   Widget build(BuildContext context) {
-    String botonInicio = 'GESTOR';
-    String botonRegistro = 'JUGADOR';
-    Color colorVerde = Color.fromARGB(255, 4, 31, 4);
-    Color colorBlanco = Color.fromARGB(255, 29, 88, 29);
+    
 
     return Scaffold(
       body: Stack(
@@ -45,9 +43,59 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                  padding: EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                    children: [
-                      botonLargo(nombre: botonRegistro, color: colorVerde,),
+                      ElevatedButton(  // BOTON 1
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PaginaCrearJugador(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 4, 31, 4), 
+                        shape: RoundedRectangleBorder( 
+                          borderRadius: BorderRadius.circular(5.0), 
+                        ),
+                      ),
+                      child: SizedBox( 
+                        width: double.infinity,
+                        child: Text(
+                          'JUGADOR',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                     ),
                       SizedBox(height: 10.0),
-                      botonLargo(nombre: botonInicio, color: colorBlanco,)
+                      ElevatedButton( 
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PaginaCrearJugador(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom( // BOTON 2
+                        backgroundColor: Color.fromARGB(255, 29, 88, 29), 
+                        shape: RoundedRectangleBorder( 
+                          borderRadius: BorderRadius.circular(5.0), 
+                        ),
+                      ),
+                      child: SizedBox( 
+                        width: double.infinity,
+                        child: Text(
+                          'GESTOR',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                     ),
                     ],
                   ),
                 ),

@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:padel_proyecto/modelos/jugador.dart';
+import 'package:padel_proyecto/paginas/pagina_eleccion.dart';
+import 'package:padel_proyecto/paginas/pagina_principal.dart';
 
 import '../widgets/boton_largo.dart';
 import '../widgets/logo.dart';
@@ -23,8 +25,7 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
     
     String botonInicio = 'Iniciar Sesión';
     String botonRegistro = '¿No tienes cuenta? Regístrate';
-    Color colorVerde = Color.fromARGB(255, 4, 31, 4);
-    Color colorBlanco = Color.fromARGB(255, 29, 88, 29);
+  
     String texto= "";
     final _formkey=GlobalKey<FormState>();
     Jugador nuevoJugador=Jugador();
@@ -152,13 +153,76 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
                               }
                             },
                           ),
-                        ],                     
-                    ),
-                  ),              
-                    botonLargo(nombre: botonInicio, color: colorVerde,),
+                          SizedBox(height: 20.0),
+                          ElevatedButton( //BOTON 1
+                            onPressed: () {
+                              if(_formkey.currentState!.validate())
+                              {
+                                  _formkey.currentState!.save();
+                                  //insertar en base de datos
+                                  print(nuevoJugador.usuario);
+                                  //retornar con pop a la pantalla anterior
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PaginaPrincipal(),
+                                    ),
+                                  );
+                              }
+                  
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Color.fromARGB(255, 4, 31, 4), 
+                              shape: RoundedRectangleBorder( // forma de rectangulo
+                                borderRadius: BorderRadius.circular(5.0), 
+                              ),
+                            ),
+                            child: SizedBox( // una caja dentro para darle forma
+                              width: double.infinity,// ocuoa todo lo ancho
+                              child: Text(
+                                'Iniciar Sesión',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                            
                     SizedBox(height: 10.0),
-                    botonLargo(nombre: botonRegistro, color: colorBlanco,),
-                    SizedBox(height: 140.0),
+                    ElevatedButton( // BOTON 2
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PaginaEleccion(),
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 29, 88, 29), 
+                        shape: RoundedRectangleBorder( // forma de rectangulo
+                          borderRadius: BorderRadius.circular(5.0), 
+                        ),
+                      ),
+                      
+                      child: SizedBox( // una caja dentro para darle forma
+                        width: double.infinity,// ocuoa todo lo ancho
+                        child: Text(
+                          '¿No tienes cuenta? Regístrate',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                        ],  
+                      
+                    ),                   
+                  ),              
+                    
+                    SizedBox(height: 10.0),
                 ],
               ),
             ),

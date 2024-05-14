@@ -28,7 +28,7 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'PISTAS DISPONIBLES', 
+          'INFORMACION DE LA PISTA', 
           style: TextStyle(
             color: const Color.fromARGB(255, 255, 255, 255),
           ),
@@ -42,32 +42,12 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
       drawer: menuLateral(), 
       body: ListView(
         children: [
-          Container(  
-            padding: EdgeInsets.only(top: 6.0,left: 370.0), 
-            child: SizedBox( 
-              width: 22.0, 
-              height: 22.0, 
-              child: FloatingActionButton( // boton flotante pequeño
-                onPressed: () {
-                },
-                child: Icon(Icons.swap_vert, size: 20,), 
-                backgroundColor: Color.fromARGB(255, 77, 185, 69), 
-                shape: CircleBorder(), // Forma de circulo
-  
-              ),
-            ),
-          ),
           cuadroInformacionPista(),
-          cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos)
+          cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos),     
         ],
+        
       ),
-      floatingActionButton: FloatingActionButton( // boton flotante grande
-        onPressed: () {
-        },
-        child: Icon(Icons.add), 
-        backgroundColor: Color.fromARGB(255, 77, 185, 69), 
-      ),
-      bottomNavigationBar: barraNavegacion(),
+      bottomNavigationBar: barraNavegacion(key: UniqueKey(),),
       backgroundColor: Color.fromARGB(255, 203, 216, 203),
     );
   }

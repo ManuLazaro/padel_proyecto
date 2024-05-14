@@ -8,6 +8,7 @@ import '../widgets/barra_navegacion.dart';
 import '../widgets/boton_largo.dart';
 import '../widgets/logo.dart';
 import '../widgets/text_field.dart';
+import 'pagina_principal.dart';
 
 class PaginaCrearPistas extends StatefulWidget {
   const PaginaCrearPistas({super.key});
@@ -84,34 +85,51 @@ Widget build(BuildContext context) {
                   ),
                   SizedBox(height: 20.0),
                  TextFormField(
+                    keyboardType: TextInputType.datetime,
                     style: TextStyle(color: Colors.white), // Color del texto del usuario
                     decoration: InputDecoration(
-                     labelText: 'Fecha',
+                     labelText: 'Fecha ',
                      labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                       enabledBorder: UnderlineInputBorder( // Borde de color, redondo y grosor
                         borderSide: BorderSide(color: Colors.white, width: 2.0), 
                         borderRadius: BorderRadius.circular(5.0), 
                       ),
                     ),
-                    validator: (value) {
-                      if((value==null)||(value.isEmpty))
-                      {
-                        return "La Fecha no puede estar vacia";
-                      }
-                      else
-                      {
-                        return null;
-                      }
-                    },
-                    onSaved: (value) {
-                      if(value!=null)
-                      {
-                        nuevaPista.fecha=value;
-                      }
+                    validator: (valor){
+                    if (valor==null || valor.isEmpty){
+                      return 'El campo no puede estar vacio';
+                    }
+                    if(RegExp(r'^(\d{2})/(\d{2})/(\d{4})$').hasMatch(valor)==false)
+                    {
+                      return 'El formato de la fecha no es correcto';
+                    }
+                    List<String> partes = valor.split("/");
+                    int dia = int.tryParse(partes[0])!;
+                    int mes = int.tryParse(partes[1])!;
+                    int anio = int.tryParse(partes[2])!;
+
+                    try{
+                      DateTime fecha = new DateTime(anio, mes, dia);
+                    }
+                    catch(e)
+                    {
+                      return 'La fecha no es correcta';
+                    };
+                    
+                    return null;
+
+                  },
+                  onSaved: (valor) {
+                    if(valor!=null)
+                    {
+                      nuevaPista.fecha = valor;
+                    }
                     },
                   ),
                   SizedBox(height: 20.0),
+                  
                   TextFormField(
+                    keyboardType: TextInputType.datetime,
                     style: TextStyle(color: Colors.white), // Color del texto del usuario
                     decoration: InputDecoration(
                      labelText: 'Hora',
@@ -121,21 +139,24 @@ Widget build(BuildContext context) {
                         borderRadius: BorderRadius.circular(5.0), 
                       ),
                     ),
-                    validator: (value) {
-                      if((value==null)||(value.isEmpty))
-                      {
-                        return "La Hora no puede estar vacia";
-                      }
-                      else
-                      {
-                        return null;
-                      }
+                    validator: (valor){
+                    if (valor==null || valor.isEmpty){
+                      return 'El campo no puede estar vacio';
+                    }
+                    if(RegExp(r'^[0-2][0-9]:[0-5][0-9]$').hasMatch(valor)==false)
+                    {
+                      return 'El formato de la fecha no es correcto';
+                    }
+                    else{
+                      return null;
+                    }
                     },
-                    onSaved: (value) {
-                      if(value!=null)
-                      {
-                        nuevaPista.hora=value;
-                      }
+                    
+                  onSaved: (valor) {
+                    if(valor!=null)
+                    {
+                      nuevaPista.hora = valor;
+                    }
                     },
                   ),
                   SizedBox(height: 20.0),
@@ -205,8 +226,14 @@ Widget build(BuildContext context) {
                     _formkey.currentState!.save();
                     //insertar en base de datos
                     print(nuevaPista.direccion);
-                    //retornar con pop a la pantalla anterior
-                }
+                    //retornar con pop a la pantalla anterior         
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaginaPrincipal(),
+                      ),
+                    );
+                }          
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: colorVerde, 

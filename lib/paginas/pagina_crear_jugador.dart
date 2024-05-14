@@ -6,6 +6,7 @@ import 'package:padel_proyecto/modelos/jugador.dart';
 import '../widgets/boton_largo.dart';
 import '../widgets/logo.dart';
 import '../widgets/text_field.dart';
+import 'pagina_principal.dart';
 
 class PaginaCrearJugador extends StatefulWidget {
   const PaginaCrearJugador({super.key});
@@ -136,6 +137,7 @@ Widget build(BuildContext context) {
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
+                    keyboardType: TextInputType.datetime,
                     style: TextStyle(color: Colors.white), // Color del texto del usuario
                     decoration: InputDecoration(
                      labelText: 'Fecha de nacimiento',
@@ -145,21 +147,35 @@ Widget build(BuildContext context) {
                         borderRadius: BorderRadius.circular(5.0), 
                       ),
                     ),
-                    validator: (value) {
-                      if((value==null)||(value.isEmpty))
-                      {
-                        return "La fecha no puede estar vacia";
-                      }
-                      else
-                      {
-                        return null;
-                      }
-                    },
-                    onSaved: (value) {
-                      if(value!=null)
-                      {
-                        nuevoJugador.fechaDeNacimiento=value;
-                      }
+                    validator: (valor){
+                    if (valor==null || valor.isEmpty){
+                      return 'El campo no puede estar vacio';
+                    }
+                    if(RegExp(r'^(\d{2})/(\d{2})/(\d{4})$').hasMatch(valor)==false)
+                    {
+                      return 'El formato de la fecha no es correcto';
+                    }
+                    List<String> partes = valor.split("/");
+                    int dia = int.tryParse(partes[0])!;
+                    int mes = int.tryParse(partes[1])!;
+                    int anio = int.tryParse(partes[2])!;
+
+                    try{
+                      DateTime fecha = new DateTime(anio, mes, dia);
+                    }
+                    catch(e)
+                    {
+                      return 'La fecha no es correcta';
+                    };
+                    
+                    return null;
+
+                  },
+                  onSaved: (valor) {
+                    if(valor!=null)
+                    {
+                      nuevoJugador.fechaDeNacimiento = valor;
+                    }
                     },
                   ),
                   SizedBox(height: 20.0),
@@ -257,8 +273,14 @@ Widget build(BuildContext context) {
                     _formkey.currentState!.save();
                     //insertar en base de datos
                     print(nuevoJugador.usuario);
-                    //retornar con pop a la pantalla anterior
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaginaPrincipal(),
+                      ),
+                    );
                 }
+                
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: colorVerde, 

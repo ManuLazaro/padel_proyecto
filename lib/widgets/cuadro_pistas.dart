@@ -24,7 +24,7 @@ class cuadroPistas extends StatelessWidget {
       children: [
         // CONTENEDOR PARA EL COLOR DE FONDO
         Container(
-          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0), 
+          margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4.0), 
           height: 110,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 255, 255, 255),
@@ -59,7 +59,7 @@ class cuadroPistas extends StatelessWidget {
         // CONTENEDOR CON LA LOGICA
         Container(
           padding: EdgeInsets.all(6.0), // Sirve para dar espacio por dentro 
-          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0), 
+          margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4.0), 
           height: 110,
           decoration: BoxDecoration(
             color: Colors.transparent,

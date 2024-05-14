@@ -25,7 +25,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
       ),
-      home: const PaginasMisReservas(),
+      home: const PaginasInfoPistas(),
     );
   }
 }
+// Modelos: Jugador, gestor, con cual te registras?
+// formulario va raro (se borran cosas)
+// NavigationBar: no funciona

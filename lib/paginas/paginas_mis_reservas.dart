@@ -37,22 +37,85 @@ class _PaginasMisReservasState extends State<PaginasMisReservas> {
       drawer: menuLateral(), 
       body: ListView(
         children: [
-          Container(  
-            padding: EdgeInsets.only(top: 6.0,left: 370.0), 
-            child: SizedBox( 
-              width: 22.0, 
-              height: 22.0, 
-              child: FloatingActionButton( // boton flotante pequeño
-                onPressed: () {
-                },
-                child: Icon(Icons.swap_vert, size: 20,), 
-                backgroundColor: Color.fromARGB(255, 77, 185, 69), 
-                shape: CircleBorder(), // Forma de circulo
-  
+          Stack(
+            children: [ /////// BOTONES DE ARRIBA PARA ORDENAR////
+              Padding(
+                padding: const EdgeInsets.only(left: 70.0),
+                child: Row(
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                      },
+                      child: Text('Fecha', style: TextStyle(fontSize: 15, color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 77, 185, 69), 
+                        shape: RoundedRectangleBorder(),// forma rectangulo                  
+                        minimumSize: Size(60, 30), 
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                      },
+                      child: Text('Nivel', style: TextStyle(fontSize: 15, color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 77, 185, 69), 
+                        shape: RoundedRectangleBorder(),// forma rectangulo                  
+                        minimumSize: Size(60, 30), 
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                      },
+                      child: Text('Huecos', style: TextStyle(fontSize: 15, color: Colors.white)),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 77, 185, 69), 
+                        shape: RoundedRectangleBorder(),// forma rectangulo                  
+                        minimumSize: Size(60, 30), 
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
+              Positioned(
+                right: 44,
+                bottom: 8.5,
+                child: Container( // Botón flotante pequeño
+                  width: 30, 
+                  height: 30, 
+                  child: Icon(Icons.swap_vert, size: 18, color: Colors.white,), 
+                  decoration: BoxDecoration(
+                    shape: BoxShape.rectangle, 
+                    color: Colors.green, 
+                  ),
+                ),
+              ),
+            ],
           ),
+          // CUADRO DE LAS PISTAS
           cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4,),
+          // BOTON AÑADIR
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 100, vertical: 10), 
+            child: ElevatedButton( 
+                        onPressed: () {
+                        },
+                        style: ElevatedButton.styleFrom( 
+                          backgroundColor: Color.fromARGB(255, 77, 185, 69), 
+                          shape: RoundedRectangleBorder( 
+                            borderRadius: BorderRadius.circular(5.0), 
+                          ),
+                        ),
+                        child: SizedBox( 
+                          child: Text(
+                            'AÑADIR  RESERVAS',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+             ),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton( // boton flotante grande
@@ -61,7 +124,7 @@ class _PaginasMisReservasState extends State<PaginasMisReservas> {
         child: Icon(Icons.add), 
         backgroundColor: Color.fromARGB(255, 77, 185, 69), 
       ),
-      bottomNavigationBar: barraNavegacion(),
+      bottomNavigationBar: barraNavegacion(key: UniqueKey(),),
       backgroundColor: Color.fromARGB(255, 203, 216, 203),
     );
   }
