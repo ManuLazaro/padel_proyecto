@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'paginas/pagina_crear_gestor.dart';
 import 'paginas/pagina_crear_jugador.dart';
 import 'paginas/pagina_crear_pistas.dart';
-import 'paginas/pagina_eleccion.dart';
 import 'paginas/pagina_historial.dart';
 import 'paginas/pagina_info_pistas.dart';
 import 'paginas/pagina_inicio_sesion.dart';
@@ -18,7 +17,7 @@ void main() {
     MultiProvider(
       providers:[ 
         ChangeNotifierProvider(
-        create:(_) => DatosUsuario()),
+        create:(_) => Datos()),
       ],
       child: const MyApp(),
     )
@@ -31,7 +30,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final datosUsuario = Provider.of<DatosUsuario>(context);
+    final datosUsuario = Provider.of<Datos>(context);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -40,3 +39,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+
+/// Lo del as int, as  datetime.... 
+/// Los DropdownButtonFormField

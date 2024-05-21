@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:padel_proyecto/modelos/usuario.dart';
 
-class DatosUsuario with ChangeNotifier{
+class Datos with ChangeNotifier{
 
   late Usuario _actual ;
+  
 
-
-  DatosUsuario (){
+  Datos (){
     _actual = Usuario();
+
   }
 
   Usuario get usuarioActual => this._actual;

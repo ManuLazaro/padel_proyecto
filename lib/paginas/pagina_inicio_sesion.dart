@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:padel_proyecto/modelos/jugador.dart';
 import 'package:padel_proyecto/modelos/usuario.dart';
-import 'package:padel_proyecto/paginas/pagina_eleccion.dart';
 import 'package:padel_proyecto/paginas/pagina_principal.dart';
 import 'package:padel_proyecto/provider/datos_usuario.dart';
 import 'package:provider/provider.dart';
@@ -11,6 +10,7 @@ import 'package:provider/provider.dart';
 import '../widgets/boton_largo.dart';
 import '../widgets/logo.dart';
 import '../widgets/text_field.dart';
+import 'pagina_crear_usuario.dart';
 
 class PaginaInicioSesion extends StatefulWidget {
   const PaginaInicioSesion({Key? key}) : super(key: key);
@@ -28,7 +28,7 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
     
     String botonInicio = 'Iniciar Sesión';
     String botonRegistro = '¿No tienes cuenta? Regístrate';
-    final datosUsuario = Provider.of<DatosUsuario>(context);
+    final datosUsuario = Provider.of<Datos>(context);
   
     String texto= "";
     final _formkey=GlobalKey<FormState>();
@@ -37,8 +37,7 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
     return Scaffold(
       body: Stack(
         children: [  
-          Container(
-            
+          Container(     
             color: Color.fromARGB(255, 77, 185, 69), // fondo 
           ),
           const Positioned( // icono de la raqueta
@@ -100,35 +99,7 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
                                 nuevoUsuario.login=value;
                               }
                             },
-                          ),
-                          TextFormField(
-                            style: TextStyle(color: Colors.white), // Color del texto del usuario
-                            decoration: InputDecoration(
-                            // label: Text('Direccion',style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                            labelText: 'Rol',
-                            labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                              enabledBorder: UnderlineInputBorder( // Borde de color, redondo y grosor
-                                borderSide: BorderSide(color: Colors.white, width: 2.0), 
-                                borderRadius: BorderRadius.circular(5.0), 
-                              ),
-                            ),
-                            validator: (value) {
-                              if((value==null)||(value.isEmpty))
-                              {
-                                return "El rol no puede estar vacio";
-                              }
-                              else
-                              {
-                                return null;
-                              }
-                            },
-                            onSaved: (value) {
-                              if(value!=null)
-                              {
-                                nuevoUsuario.rol=value;
-                              }
-                            },
-                          ),
+                          ),                     
                           SizedBox(height: 10.0),
                           TextFormField(
                             style: TextStyle(color: Colors.white), // Color del texto del usuario
@@ -140,6 +111,7 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
                                 borderRadius: BorderRadius.circular(5.0), 
                               ),
                             ),
+                            obscureText: true, // Ocultar el texto
                             validator: (value) {
                               if((value==null)||(value.isEmpty))
                               {
@@ -156,45 +128,15 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
                                 nuevoUsuario.password=value;
                               }
                             },
-                          ),
-                           SizedBox(height: 20.0),
-                          // TextFormField(
-                          //   style: TextStyle(color: Colors.white), // Color del texto del usuario
-                          //   decoration: InputDecoration(
-                          //   labelText: 'Repetir Contraseña',
-                          //   labelStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                          //     enabledBorder: UnderlineInputBorder( // Borde de color, redondo y grosor
-                          //       borderSide: BorderSide(color: Colors.white, width: 2.0), 
-                          //       borderRadius: BorderRadius.circular(5.0), 
-                          //     ),
-                          //   ),
-                          //   validator: (value) {
-                          //     if((value==null)||(value.isEmpty))
-                          //     {
-                          //       return "La contraseña no puede estar vacia";
-                          //     }
-                          //     else
-                          //     if(nuevoUsuario.password!= value)
-                          //     {
-                          //       return "Las contraseñas no son iguales";
-                                
-                          //     }
-                          //     else
-                          //     {
-                          //       return null;
-                          //     }
-                          //   },
-                        
-                          // ),
+                          ),                     
                           SizedBox(height: 20.0),
                           ElevatedButton( //BOTON 1
                             onPressed: () {
                               if(_formkey.currentState!.validate())
                               {
-                                  _formkey.currentState!.save();
-                                  //insertar en base de datos
+                                  _formkey.currentState!.save();                    
                                   print(nuevoUsuario.login);
-                                  //retornar con pop a la pantalla anterior
+
                                   nuevoUsuario.nombre= nuevoUsuario.login;
                                   datosUsuario.usuarioActual=nuevoUsuario;
                                   Navigator.push(

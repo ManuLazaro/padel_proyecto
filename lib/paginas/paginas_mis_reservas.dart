@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../widgets/barra_navegacion.dart';
 import '../widgets/cuadro_pistas.dart';
 import '../widgets/menu_lateral.dart';
+import 'pagina_info_mis_reservas.dart';
 
 class PaginasMisReservas extends StatefulWidget {
   const PaginasMisReservas({super.key});
@@ -91,8 +92,16 @@ class _PaginasMisReservasState extends State<PaginasMisReservas> {
               ),
             ],
           ),
-          // CUADRO DE LAS PISTAS
-          cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4,),
+         // CUADRO DE LAS PISTAS
+          GestureDetector( // meto el cuadro pistas dentro de esto, para poder tener un OnTap
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PaginaInfoReservas()),
+              );
+            },
+            child: cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4),
+          ),
           // BOTON AÑADIR
           Container(
             margin: EdgeInsets.symmetric(horizontal: 100, vertical: 10), 

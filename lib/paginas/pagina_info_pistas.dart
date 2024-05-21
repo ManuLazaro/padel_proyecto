@@ -18,7 +18,7 @@ class PaginasInfoPistas extends StatefulWidget {
 class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
   @override
   Widget build(BuildContext context) {
-    final datos= Provider.of<DatosUsuario>(context);
+    final datos= Provider.of<Datos>(context);
     String centro = 'Padel centro de valladolid';
     String lugar = 'Calle alguna de algo';
     String fecha = '12/12/2025';

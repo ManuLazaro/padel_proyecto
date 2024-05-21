@@ -46,12 +46,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => PaginasInfoPistas(),
-                          ),
-                    );
+                        
                       },
                       child: Text('Fecha', style: TextStyle(fontSize: 15, color: Colors.white)),
                       style: ElevatedButton.styleFrom(
@@ -99,7 +94,15 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
             ],
           ),
           // CUADRO DE LAS PISTAS
-          cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4,),
+          GestureDetector( // meto el cuadro pistas dentro de esto, para poder tener un OnTap
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PaginasInfoPistas()),
+              );
+            },
+            child: cuadroPistas(centro: centro, lugar: lugar, hora: hora, fecha: fecha, ocupados: 4),
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

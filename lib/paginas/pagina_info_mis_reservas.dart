@@ -26,7 +26,7 @@ class _PaginaInfoReservasState extends State<PaginaInfoReservas> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'INFORMACION DE LA PISTA', 
+          'INFORMACION DE LA RESERVA', 
           style: TextStyle(
             color: const Color.fromARGB(255, 255, 255, 255),
           ),
