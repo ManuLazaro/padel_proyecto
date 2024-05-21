@@ -122,7 +122,7 @@ Widget build(BuildContext context) {
                   onSaved: (valor) {
                     if(valor!=null)
                     {
-                      nuevaPista.fecha = valor;
+                     nuevaPista.fecha = DateTime.parse(valor);
                     }
                     },
                   ),

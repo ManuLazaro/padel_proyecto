@@ -72,13 +72,13 @@ class Usuario {
     map['rol'] = rol;
     return map;
   }
-
+  // Obtener lista de usuarios
   Future<List<Usuario>> getUsuarios(bool modoLocal)async{
-    List<Usuario> listaUsuarios = [];
-    Usuario usuario = new Usuario();
+    List<Usuario> listaUsuarios = []; // Inicializar lista vacía de usuarios
+    Usuario usuario = new Usuario(); // objeto Usuario
     DateTime fechaDeNacimiento = DateTime.now();
     if(modoLocal){
-      // codigo conexion base de datos ocn sqlite
+      // codigo conexion base de datos con sqlite
       DBHelper dbHelper = DBHelper();
       List<Map<String, dynamic>> usuarios = await dbHelper.consultarTabla("usuarios");
 
@@ -91,5 +91,4 @@ class Usuario {
     }
     return listaUsuarios;
   }
-  
 }
