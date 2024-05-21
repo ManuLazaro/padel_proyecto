@@ -140,7 +140,8 @@ Widget build(BuildContext context) {
                     onSaved: (value) {
                       if(value!=null)
                       {
-                        nuevoJugador.codigoPostal=value as int;
+                        print(value);
+                        nuevoJugador.codigoPostal=int.parse(value);
                       }
                     },
                   ),

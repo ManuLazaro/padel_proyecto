@@ -1,6 +1,6 @@
 class Gestor {
 
-  int id = 0;
+  int _id = 0;
   String centroDeportivo="";
   int numPistas=0;
   String direccion="";
@@ -9,19 +9,19 @@ class Gestor {
 
   //constructor
   Gestor() {
-    this.id = 0;
+    this._id = 0;
     this.centroDeportivo = '';
     this.numPistas = 0;
     this.direccion = '';
     this.telefonoContacto = '';
   }
-  //constructor sin id
-  Gestor.withoutId(this.centroDeportivo, this.numPistas, this.direccion, this.telefonoContacto);
-  //constructor con id
-  Gestor.withId(this.id, this.centroDeportivo, this.numPistas, this.direccion, this.telefonoContacto);
+  //constructor sin _id
+  Gestor.without_id(this.centroDeportivo, this.numPistas, this.direccion, this.telefonoContacto);
+  //constructor con _id
+  Gestor.with_id(this._id, this.centroDeportivo, this.numPistas, this.direccion, this.telefonoContacto);
   //constructor con map
   Gestor.fromMap(Map<String, dynamic> map) {
-    this.id = (map['id']!=null)?map['id']:null;
+    this._id = (map['id']!=null)?map['id']:null;
     this.centroDeportivo = (map['centroDeportivo']!=null)?map['centroDeportivo']:'';
     this.numPistas = (map['numPistas']!=null)?map['numPistas']:'';
     this.direccion = (map['direccion']!=null)?map['direccion']:'';
@@ -29,7 +29,7 @@ class Gestor {
   }
   
   //Getters y setters 
-  int? get _id => id;
+  int? get id => _id;
   String get _centroDeportivo => centroDeportivo;
   int get _numPistas => numPistas;
   String get _direccion => direccion;
@@ -46,7 +46,7 @@ class Gestor {
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
-    if (_id != null) map['id'] = _id;
+    if (id != null) map['_id'] = id;
     map['centroDeportivo'] = centroDeportivo;
     map['numPistas'] = numPistas;
     map['direccion'] = direccion;

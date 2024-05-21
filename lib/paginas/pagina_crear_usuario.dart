@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:padel_proyecto/modelos/base_de_datos.dart';
 import 'package:padel_proyecto/modelos/usuario.dart';
 
 import '../widgets/boton_largo.dart';
@@ -24,7 +25,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
 
   @override
   Widget build(BuildContext context) {
-    
+    String passTemp ="";
 
     return Scaffold(
      body: Container(
@@ -178,8 +179,48 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                     nuevoUsuario.fechaDeNacimiento = DateTime(anio, mes, dia);
                   }
                 },
-                  ),
+                  ),                  
                   SizedBox(height: 20.0),
+                  ////////////////////////// LABEL ROL ////////////////////////////////
+                  DropdownButtonFormField<String>(          
+                    decoration: InputDecoration(
+                      labelText: 'Rol',
+                      labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder( 
+                        borderSide: BorderSide(color: Colors.white, width: 1.0),
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
+                    style: TextStyle(color: Colors.white),
+                    dropdownColor: Colors.green, 
+                    items: [ // OPCIONES DEL DROPDOWNBUTTON
+                      DropdownMenuItem(
+                        value: '0',
+                        child: Text('Gestor'),
+                      ),
+                      DropdownMenuItem(
+                        value: '1',
+                        child: Text('Jugador'),
+                      ),
+                    ],
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "No puede estar vacio";
+                      } else {
+                        return null;
+                      }
+                    },
+                    onChanged: (value) {
+                     
+                    },
+                    onSaved: (value) {
+                      if (value != null) {
+                        
+                        nuevoUsuario.rol = int.parse(value);
+                      }
+                    },
+                  ),
+                  SizedBox(height: 20.0), 
                   ////////////////////////// LABEL PASSWORD ////////////////////////////////
                  TextFormField(
                     style: TextStyle(color: Colors.white), // Color del texto del usuario
@@ -199,6 +240,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                       }
                       else
                       {
+                        passTemp = value;
                         return null;
                       }
                     },
@@ -208,45 +250,36 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                         nuevoUsuario.password=value;
                       }
                     },
-                  ), 
-                   ////////////////////////// LABEL ROL ////////////////////////////////
-                  DropdownButtonFormField<String>(          
-                    decoration: InputDecoration(
-                      labelText: 'Rol',
-                      labelStyle: TextStyle(color: Colors.white),
-                      enabledBorder: UnderlineInputBorder( 
-                        borderSide: BorderSide(color: Colors.white, width: 1.0),
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
-                    style: TextStyle(color: Colors.white),
-                    dropdownColor: Colors.green, 
-                    items: [ // OPCIONES DEL DROPDOWNBUTTON
-                      DropdownMenuItem(
-                        value: 'Gestor',
-                        child: Text('Gestor'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'Jugador',
-                        child: Text('Jugador'),
-                      ),
-                    ],
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return "No puede estar vacio";
-                      } else {
-                        return null;
-                      }
-                    },
-                    onChanged: (value) {
-                     
-                    },
-                    onSaved: (value) {
-                      if (value != null) {
-                        nuevoUsuario.rol = value as int;
-                      }
-                    },
                   ),
+                  SizedBox(height: 20.0), 
+                  ////////////////////////// LABEL REPETIR CONTRASEÑA ////////////////////////////////
+                   TextFormField(
+                            style: TextStyle(color: Colors.white), // Color del texto del usuario
+                              decoration: InputDecoration(
+                              labelText: 'Repetir Contraseña',
+                              labelStyle: TextStyle(color: Colors.white),
+                                enabledBorder: UnderlineInputBorder( // Borde de color, redondo y grosor
+                                  borderSide: BorderSide(color: Colors.white, width: 1.0), 
+                                  borderRadius: BorderRadius.circular(5.0), 
+                                ),
+                              ),
+                            validator: (value) {
+                              if((value==null)||(value.isEmpty))
+                              {
+                                return "La contraseña no puede estar vacia";
+                              }
+                              else
+                              if(passTemp != value)
+                              {
+                                return "Las contraseñas no son iguales";
+                                
+                              }
+                              else
+                              {
+                                return null;
+                              }
+                            },           
+                          ),     
                 SizedBox(height: 20.0), 
                 ],
               ),
@@ -258,8 +291,9 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                       if(_formkey.currentState!.validate())
                       {
                           _formkey.currentState!.save();
-                          
-                          
+                          DBHelper dbHelper = new DBHelper();
+                          dbHelper.insertarTabla('usuario', nuevoUsuario.toMap());
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(

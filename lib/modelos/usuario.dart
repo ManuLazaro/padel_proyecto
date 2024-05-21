@@ -1,5 +1,7 @@
+import 'package:padel_proyecto/modelos/base_de_datos.dart';
+
 class Usuario {
-  int id=0;
+  int id = 0;
   String login = "";
   String nombre = "";
   String apellidos = "";
@@ -27,7 +29,7 @@ class Usuario {
     this.login = (map['login']!=null)?map['login']:'';
     this.nombre = (map['nombre']!=null)?map['nombre']:'';
     this.apellidos = (map['apellidos']!=null)?map['apellidos']:'';
-    this.fechaDeNacimiento = (map['fechaDeNacimiento']!=null)?map['fechaDeNacimiento']:'';
+    this.fechaDeNacimiento = DateTime.parse(map['fechaDeNacimiento']);
     this.password = (map['password']!=null)?map['password']:'';
     this.rol = (map['rol']!=null)?map['rol']:'';
   }
@@ -61,13 +63,33 @@ class Usuario {
   }
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
-    if (_id != null) map['id'] = _id;
+    if (_id != null && id!=0) map['id'] = _id;
     map['login'] = login;
     map['nombre'] = nombre;
     map['apellidos'] = apellidos;
-    map['fechaDeNacimiento'] = fechaDeNacimiento;
+    map['fechaDeNacimiento'] = fechaDeNacimiento.toString();
     map['password'] = password;
-    map['rol'] = password;
+    map['rol'] = rol;
     return map;
   }
+
+  Future<List<Usuario>> getUsuarios(bool modoLocal)async{
+    List<Usuario> listaUsuarios = [];
+    Usuario usuario = new Usuario();
+    DateTime fechaDeNacimiento = DateTime.now();
+    if(modoLocal){
+      // codigo conexion base de datos ocn sqlite
+      DBHelper dbHelper = DBHelper();
+      List<Map<String, dynamic>> usuarios = await dbHelper.consultarTabla("usuarios");
+
+      for(int i = 0; i< usuarios.length; i++){
+        usuario = Usuario.fromMap(usuarios[i]);
+        listaUsuarios.add(usuario);
+      }
+    }else{
+      //codigo para la conexion con el API
+    }
+    return listaUsuarios;
+  }
+  
 }
