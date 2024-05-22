@@ -20,7 +20,8 @@ class cuadroPistas extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return 
+    Stack(
       children: [
         // CONTENEDOR PARA EL COLOR DE FONDO
         Container(

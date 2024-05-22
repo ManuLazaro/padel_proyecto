@@ -48,7 +48,7 @@ class DBHelper{
           );
           //para añadir una segunda tabla
          await db.execute(
-           "CREATE TABLE  IF NOT EXISTS Pistas (id INTEGER PRIMARY KEY, direccion TEXT, fecha text, pista TEXT, hora TEXT, precio INTEGER)"
+           "CREATE TABLE  IF NOT EXISTS Pista (id INTEGER PRIMARY KEY, direccion TEXT, fecha text, nombrePista TEXT, hora TEXT, precio INTEGER, jugadores INTEGER, idJ1 INTEGER, idJ2 INTEGER, idJ3 INTEGER, idJ4 INTEGER)"
          );
          
       }

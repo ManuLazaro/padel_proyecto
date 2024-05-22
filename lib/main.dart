@@ -41,5 +41,3 @@ class MyApp extends StatelessWidget {
 }
 
 
-/// Lo del as int, as  datetime.... 
-/// Los DropdownButtonFormField

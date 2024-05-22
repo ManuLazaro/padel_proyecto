@@ -1,15 +1,18 @@
-class Gestor {
+import 'package:padel_proyecto/modelos/usuario.dart';
 
-  int _id = 0;
+class Gestor extends Usuario{
+
+  //int _id = 0;
   String centroDeportivo="";
   int numPistas=0;
   String direccion="";
   String telefonoContacto="";
   
+  
 
   //constructor
   Gestor() {
-    this._id = 0;
+    this.id = 0;
     this.centroDeportivo = '';
     this.numPistas = 0;
     this.direccion = '';
@@ -18,10 +21,19 @@ class Gestor {
   //constructor sin _id
   Gestor.without_id(this.centroDeportivo, this.numPistas, this.direccion, this.telefonoContacto);
   //constructor con _id
-  Gestor.with_id(this._id, this.centroDeportivo, this.numPistas, this.direccion, this.telefonoContacto);
+  //Gestor.with_id(super.id, this.centroDeportivo, this.numPistas, this.direccion, this.telefonoContacto);
+
+  Gestor.with_id(int id, String centro, int pistas, String dir, String telefono)
+  {
+    this.id=id;
+    this.centroDeportivo=centro;
+    this.numPistas=pistas;
+    this.direccion=dir;
+    this.telefonoContacto=telefono;
+  }
   //constructor con map
   Gestor.fromMap(Map<String, dynamic> map) {
-    this._id = (map['id']!=null)?map['id']:null;
+    this.id = (map['id']!=null)?map['id']:null;
     this.centroDeportivo = (map['centroDeportivo']!=null)?map['centroDeportivo']:'';
     this.numPistas = (map['numPistas']!=null)?map['numPistas']:'';
     this.direccion = (map['direccion']!=null)?map['direccion']:'';
@@ -29,7 +41,7 @@ class Gestor {
   }
   
   //Getters y setters 
-  int? get id => _id;
+  //int? get id => _id;
   String get _centroDeportivo => centroDeportivo;
   int get _numPistas => numPistas;
   String get _direccion => direccion;

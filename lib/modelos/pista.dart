@@ -1,84 +1,122 @@
-import 'dart:html';
+import 'package:padel_proyecto/modelos/jugador.dart';
 
 import 'base_de_datos.dart';
 
 class Pista {
 
-  int id = 0;
-  String direccion="";
-  DateTime fecha=DateTime.now(); 
-  String pista="";
-  String hora="";
-  int precio=0;
+  int _id = 0;
+  String _direccion="";
+  DateTime _fecha=DateTime.now(); 
+  String _nombrePista="";
+  String _hora="";
+  int _precio=0;
+  int _jugadores= 0; // jugadores apuntados totales
+  int _idJ1=0; // player 1 ......
+  int _idJ2=0;
+  int _idJ3=0;
+  int _idJ4=0;
+  int _resultado=0; // si es 0 el partido no se ha jugado, si es <0 hay ganado J3 y J4 y si es >0 J1 y J2
   
 
     Pista() {
-    id = 0;
-    direccion = "";
-    fecha = DateTime.now(); 
-    pista = "";
-    hora = ""; 
-    precio = 0;
+    _id = 0;
+    _direccion = "";
+    _fecha = DateTime.now(); 
+    _nombrePista = "";
+    _hora = ""; 
+    _precio = 0;
   }
   
-  //constructor sin id
-  Pista.withoutId(this.direccion, this.fecha, this.pista, this.hora,this.precio);
-  //constructor con id
-  Pista.withId(this.id, this.direccion, this.fecha, this.pista, this.hora, this.precio);
+  //constructor sin _id
+  Pista.withoutId(this._direccion, this._fecha, this._nombrePista, this._hora,this._precio);
+  //constructor con _id
+  Pista.withId(this._id, this._direccion, this._fecha, this._nombrePista, this._hora, this._precio);
   //constructor con map
   Pista.fromMap(Map<String, dynamic> map) {
-    this.id = (map['id']!=null)?map['id']:null;
-    this.direccion = (map['direccion']!=null)?map['direccion']:'';
-    this.fecha = DateTime.parse(map['fecha']);
-    this.pista = (map['pista']!=null)?map['pista']:'';
-    this.hora = (map['hora']!=null)?map['hora']:'';
-    this.precio = (map['precio']!=null)?map['precio']:'';
+    this._id = (map['id']!=null)?map['id']:null;
+    this._direccion = (map['direccion']!=null)?map['direccion']:'';
+    this._fecha = DateTime.parse(map['fecha']);
+    this._nombrePista = (map['nombrePista']!=null)?map['nombrePista']:'';
+    this._hora = (map['hora']!=null)?map['hora']:'';
+    this._precio = (map['precio']!=null)?map['precio']:'';
+    this._jugadores = (map['jugadores']!=null)?map['jugadores']:'';
+    this._idJ1 = (map['idJ1']!=null)?map['idJ1']:'';
+    this._idJ2 = (map['idJ2']!=null)?map['idJ2']:'';
+    this._idJ3 = (map['idJ3']!=null)?map['idJ3']:'';
+    this._idJ4 = (map['idJ4']!=null)?map['idJ4']:'';
   }
   
   //Getters y setters 
-  int? get _id => id;
-  String get _direccion => direccion;
-  DateTime get _fecha => fecha;
-  String get _pista => pista;
-  String get _hora => hora;
-  int get _precio => precio;
+  int? get id => _id;
+  String get direccion => _direccion;
+  DateTime get fecha => _fecha;
+  String get nombrePista => _nombrePista;
+  String get hora => _hora;
+  int get precio => _precio;
+  int get jugadores => _jugadores;
+  int get idJ1 => _idJ1;
+   int get idJ2 => _idJ2;
+    int get idJ3 => _idJ3;
+     int get idJ4 => _idJ4;
   
 
-  set _direccion(String _direccion) {
-    this.direccion = _direccion;
+  set direccion(String direccion) {
+    this._direccion = direccion;
   }
-  set _fecha(DateTime _fecha) {
-    this.fecha = _fecha;
+  set fecha(DateTime fecha) {
+    this._fecha = fecha;
   }
-  set _pista(String _pista) {
-    this.pista = _pista;
+  set nombrePista(String pista) {
+    this._nombrePista = pista;
   }
-  set _hora(String _hora) {
-    this.hora = _hora;
+  set hora(String hora) {
+    this._hora = hora;
   }
-  set _precio(int _precio) {
-    this.precio = _precio;
+  set precio(int precio) {
+    this._precio = precio;
+  }
+  set jugadores (int numJugadores){
+    this._jugadores = numJugadores;
+  }
+  set idJ1 (int idJ1){
+    this._idJ1 = idJ1;
+  }
+  set idJ2 (int idJ2){
+    this._idJ2 = idJ2;
+  }
+  set idJ3 (int idJ3){
+    this._idJ3 = idJ3;
+  }
+  set idJ4 (int idJ4){
+    this._idJ4 = idJ4;
   }
   
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
-    if (_id != null) map['id'] = _id;
-    map['direccion'] = direccion;
-    map['fecha'] = fecha.toString();
-    map['pista'] = pista;
-    map['hora'] = hora;
-    map['precio'] = precio;
+    if (_id != null && id!=0) map['id'] = _id;
+    map['direccion'] = _direccion;
+    map['fecha'] = _fecha.toString();
+    map['nombrePista'] = _nombrePista;
+    map['hora'] = _hora;
+    map['precio'] = _precio;
+    map['jugadores']= _jugadores;
+    map ['idJ1']= _idJ1;
+    map ['idJ2']= _idJ2;
+    map ['idJ3']= _idJ3;
+    map ['idJ4']= _idJ4;
     return map;
   }
+
+
   // Obtener lista de pistas
-  Future<List<Pista>> getUsuarios(bool modoLocal)async{
+  Future<List<Pista>> getPistas(bool modoLocal)async{
     List<Pista> listaPistas = []; // Inicializar lista vacía de pistas
-    Pista pista = new Pista(); // objeto pista
-    DateTime fecha = DateTime.now();
+    Pista pista = new Pista(); // objeto _nombrePista
+    DateTime _fecha = DateTime.now();
     if(modoLocal){
       // codigo conexion base de datos con sqlite
       DBHelper dbHelper = DBHelper();
-      List<Map<String, dynamic>> pistas = await dbHelper.consultarTabla("pistas");
+      List<Map<String, dynamic>> pistas = await dbHelper.consultarTabla("Pista");
 
       for(int i = 0; i< pistas.length; i++){
         pista = Pista.fromMap(pistas[i]);

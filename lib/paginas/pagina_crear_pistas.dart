@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:padel_proyecto/modelos/base_de_datos.dart';
 import 'package:padel_proyecto/modelos/pista.dart';
 
 
@@ -122,7 +123,11 @@ Widget build(BuildContext context) {
                   onSaved: (valor) {
                     if(valor!=null)
                     {
-                     nuevaPista.fecha = DateTime.parse(valor);
+                    List<String> partes = valor.split("/");
+                    int dia = int.tryParse(partes[0])!;
+                    int mes = int.tryParse(partes[1])!;
+                    int anio = int.tryParse(partes[2])!;
+                     nuevaPista.fecha = new DateTime(anio, mes, dia);
                     }
                     },
                   ),
@@ -151,12 +156,40 @@ Widget build(BuildContext context) {
                     onSaved: (value) {
                       if(value!=null)
                       {
-                        nuevaPista.pista=value;
+                        nuevaPista.nombrePista=value;
                       }
                     },
                   ),
                   SizedBox(height: 20.0),
-                  ////////////////////////// LABEL PRECIO ////////////////////////////////
+                  ////////////////////////// LABEL HORA ////////////////////////////////
+                  TextFormField(
+                    style: TextStyle(color: Colors.white), // Color del texto del usuario
+                    decoration: InputDecoration(
+                     labelText: 'Hora',
+                     labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder( // Borde de color, redondo y grosor
+                        borderSide: BorderSide(color: Colors.white, width: 1.0), 
+                        borderRadius: BorderRadius.circular(5.0), 
+                      ),
+                    ),
+                    validator: (value) {
+                      if((value==null)||(value.isEmpty))
+                      {
+                        return "No puede estar vacio";
+                      }
+                      else
+                      {
+                        return null;
+                      }
+                    },
+                    onSaved: (value) {
+                      if(value!=null)
+                      {
+                        nuevaPista.hora=value;
+                      }
+                    },
+                  ),
+                  SizedBox(height: 20.0),
                   TextFormField(
                     style: TextStyle(color: Colors.white), // Color del texto del usuario
                     decoration: InputDecoration(
@@ -180,7 +213,7 @@ Widget build(BuildContext context) {
                     onSaved: (value) {
                       if(value!=null)
                       {
-                        nuevaPista.precio=value as int;
+                        nuevaPista.precio=int.parse(value);
                       }
                     },
                   ),
@@ -193,7 +226,9 @@ Widget build(BuildContext context) {
                 if(_formkey.currentState!.validate())
                 {
                     _formkey.currentState!.save();
-                    //insertar en base de datos
+                    //insertar en base de datos 
+                    DBHelper dbHelper = new DBHelper();
+                    dbHelper.insertarTabla('pista', nuevaPista.toMap());
                     print(nuevaPista.direccion);
                     //retornar con pop a la pantalla anterior
                 }
