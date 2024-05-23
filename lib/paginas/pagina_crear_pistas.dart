@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:padel_proyecto/modelos/base_de_datos.dart';
 import 'package:padel_proyecto/modelos/pista.dart';
+import 'package:padel_proyecto/widgets/ThemeApp.dart';
 
 
 import '../widgets/barra_navegacion.dart';
 import '../widgets/boton_largo.dart';
-import '../widgets/logo.dart';
+
 import '../widgets/text_field.dart';
 
 class PaginaCrearPistas extends StatefulWidget {
@@ -55,6 +56,35 @@ Widget build(BuildContext context) {
               child: ListView( 
                 children: [
                   SizedBox(height: 30.0),
+                   ////////////////////////// LABEL CENTRO DEPORTIVO ////////////////////////////////
+                  TextFormField(
+                    style: TextStyle(color: Colors.white), // Color del texto del usuario que escriba
+                    decoration: InputDecoration(
+                     labelText: 'Centro deportivo',
+                     labelStyle: TextStyle(color: Colors.white),
+                      enabledBorder: UnderlineInputBorder( // Borde de color, redondo y grosor
+                        borderSide: BorderSide(color: Colors.white, width: 1.0), 
+                        borderRadius: BorderRadius.circular(5.0), 
+                      ),
+                    ),
+                    validator: (value) {
+                      if((value==null)||(value.isEmpty))
+                      {
+                        return "No puede estar vacio";
+                      }
+                      else
+                      {
+                        return null;
+                      }
+                    },
+                    onSaved: (value) {
+                      if(value!=null)
+                      {
+                        nuevaPista.centroDeportivo=value;
+                      }
+                    },
+                  ),
+                  SizedBox(height: 20.0),
                   ////////////////////////// LABEL DIRECCION ////////////////////////////////
                   TextFormField(
                     style: TextStyle(color: Colors.white), // Color del texto del usuario que escriba
@@ -249,7 +279,7 @@ Widget build(BuildContext context) {
                   ),
                 ),
               ),
-                          ) // Botón fuera de la ListView
+            ) // Botón fuera de la ListView
           ],
         ),
       ),

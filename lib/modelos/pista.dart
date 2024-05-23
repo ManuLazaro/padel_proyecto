@@ -5,6 +5,7 @@ import 'base_de_datos.dart';
 class Pista {
 
   int _id = 0;
+  String _centroDeportivo= "";
   String _direccion="";
   DateTime _fecha=DateTime.now(); 
   String _nombrePista="";
@@ -20,6 +21,7 @@ class Pista {
 
     Pista() {
     _id = 0;
+    _centroDeportivo= "";
     _direccion = "";
     _fecha = DateTime.now(); 
     _nombrePista = "";
@@ -28,12 +30,13 @@ class Pista {
   }
   
   //constructor sin _id
-  Pista.withoutId(this._direccion, this._fecha, this._nombrePista, this._hora,this._precio);
+  Pista.withoutId(this._centroDeportivo,this._direccion, this._fecha, this._nombrePista, this._hora,this._precio);
   //constructor con _id
-  Pista.withId(this._id, this._direccion, this._fecha, this._nombrePista, this._hora, this._precio);
+  Pista.withId(this._id,this._centroDeportivo, this._direccion, this._fecha, this._nombrePista, this._hora, this._precio);
   //constructor con map
   Pista.fromMap(Map<String, dynamic> map) {
     this._id = (map['id']!=null)?map['id']:null;
+    this._centroDeportivo = (map['centroDeportivo']!=null)?map['centroDeportivo']:'';
     this._direccion = (map['direccion']!=null)?map['direccion']:'';
     this._fecha = DateTime.parse(map['fecha']);
     this._nombrePista = (map['nombrePista']!=null)?map['nombrePista']:'';
@@ -48,6 +51,7 @@ class Pista {
   
   //Getters y setters 
   int? get id => _id;
+   String get centroDeportivo => _centroDeportivo;
   String get direccion => _direccion;
   DateTime get fecha => _fecha;
   String get nombrePista => _nombrePista;
@@ -55,11 +59,13 @@ class Pista {
   int get precio => _precio;
   int get jugadores => _jugadores;
   int get idJ1 => _idJ1;
-   int get idJ2 => _idJ2;
-    int get idJ3 => _idJ3;
-     int get idJ4 => _idJ4;
+  int get idJ2 => _idJ2;
+  int get idJ3 => _idJ3;
+  int get idJ4 => _idJ4;
   
-
+  set centroDeportivo(String centroDeportivo) {
+    this._centroDeportivo = centroDeportivo;
+  }
   set direccion(String direccion) {
     this._direccion = direccion;
   }
@@ -94,6 +100,7 @@ class Pista {
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
     if (_id != null && id!=0) map['id'] = _id;
+    map['centroDeportivo'] = _centroDeportivo;
     map['direccion'] = _direccion;
     map['fecha'] = _fecha.toString();
     map['nombrePista'] = _nombrePista;

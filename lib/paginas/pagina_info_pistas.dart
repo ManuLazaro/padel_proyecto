@@ -47,9 +47,34 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
         children: [
           cuadroInformacionPista(),
           cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos),     
+          SizedBox(height: 10),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 110),
+            child: ElevatedButton( 
+                          onPressed: () {
+                          },
+                          style: ElevatedButton.styleFrom( 
+                            backgroundColor: Color.fromARGB(255, 77, 185, 69),
+                            shape: RoundedRectangleBorder( 
+                              borderRadius: BorderRadius.circular(5.0), 
+                            ),
+                          ),
+                          child: SizedBox( 
+                            child: Text(
+                              'Reservar',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold, 
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+               ),
+          ),
         ],
-        
+
       ),
+      
       
       backgroundColor: Color.fromARGB(255, 203, 216, 203),
     );

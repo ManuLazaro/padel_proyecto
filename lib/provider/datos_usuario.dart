@@ -4,6 +4,7 @@ import 'package:padel_proyecto/modelos/usuario.dart';
 class Datos with ChangeNotifier{
 
   late Usuario _actual ;
+ 
   
 
   Datos (){
@@ -17,7 +18,7 @@ class Datos with ChangeNotifier{
     this._actual=value;
     notifyListeners();
   }
-
+  
 
 
 } 

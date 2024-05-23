@@ -4,12 +4,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:padel_proyecto/main.dart';
 import 'package:padel_proyecto/rutas/rutas.dart';
+import 'package:padel_proyecto/widgets/ThemeApp.dart';
 import 'package:padel_proyecto/widgets/menu_lateral.dart';
 import 'package:padel_proyecto/widgets/barra_navegacion.dart';
 
 import '../modelos/gestor.dart';
 import '../widgets/boton_largo.dart';
-import '../widgets/logo.dart';
 import '../widgets/text_field.dart';
 import 'pagina_principal.dart';
 class PaginaCrearGestor extends StatefulWidget {

@@ -94,4 +94,28 @@ class PistaPadel extends StatelessWidget {
       ),
     );
   }
+  
 }
+TextStyle temaApp() {
+    return TextStyle(
+        fontWeight: FontWeight.bold, 
+        fontFamily: 'Cupertino Icons', 
+        fontSize: 15, 
+        );
+  }
+  TextStyle temaAppBar() {
+    return TextStyle(
+        fontWeight: FontWeight.bold, 
+        fontFamily: 'Arial', 
+        color: Colors.white,
+        fontSize: 25, 
+        shadows: [
+          Shadow(
+            color: Color.fromARGB(255, 107, 104, 104).withOpacity(0.5), 
+            offset: Offset(1, 1), 
+            blurRadius: 5, 
+          ),
+        ],
+        );
+  }
+

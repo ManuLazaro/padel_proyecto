@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:padel_proyecto/paginas/pagina_info_mis_reservas.dart';
+import 'package:padel_proyecto/paginas/pagina_info_pistas.dart';
+import 'package:padel_proyecto/widgets/ThemeApp.dart';
+
+
 class cuadroPistas extends StatelessWidget {
   const cuadroPistas({
     Key? key,
@@ -23,9 +28,11 @@ class cuadroPistas extends StatelessWidget {
     return 
     Stack(
       children: [
-        // CONTENEDOR PARA EL COLOR DE FONDO
+        //////////////////////////////////////////////////////
+        ////////////// CONTENEDOR PARA EL FONDO///////////////
+        //////////////////////////////////////////////////////
         Container(
-          margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4.0), 
+          margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 7.0), 
           height: 110,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 255, 255, 255),
@@ -43,7 +50,8 @@ class cuadroPistas extends StatelessWidget {
                 width: 5.0, 
               ),
             ),
-          ),),
+          ),
+          ),
          // Raqueta de fondo
         Positioned(
           top: 30.0,
@@ -57,61 +65,82 @@ class cuadroPistas extends StatelessWidget {
             ),
           ),
         ),
-        // CONTENEDOR CON LA LOGICA
-        Container(
-          padding: EdgeInsets.all(6.0), // Sirve para dar espacio por dentro 
-          margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 4.0), 
-          height: 110,
-          decoration: BoxDecoration(
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(5.0), // Bordes redondos
-            border: BorderDirectional( // borde de color solo en el lado derecho
-              end: BorderSide(
-                color:(ocupados!=4)? Colors.green:Colors.black,
-                width: 5.0, 
+        ////////////////////////////////////////////////////////////////////
+        //////////////////// CONTENEDOR CON LA LOGICA///////////////////////
+        ////////////////////////////////////////////////////////////////////
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => PaginasInfoPistas()),
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(6.0), // Sirve para dar espacio por dentro 
+            margin: EdgeInsets.symmetric(vertical: 3.0, horizontal: 7.0), 
+            height: 110,
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(5.0), // Bordes redondos
+              border: BorderDirectional( // borde de color solo en el lado derecho
+                end: BorderSide(
+                  color:(ocupados!=4)? Colors.green:Colors.black,
+                  width: 5.0, 
+                ),
               ),
             ),
+            child: Row(   
+              children: [
+                Expanded(
+                  child: StreamBuilder<Object>(
+                    stream: null,
+                    builder: (context, snapshot) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center, // lo coloca en el centro
+                        children: [
+                          Text(
+                            centro,
+                            style: temaApp(),
+                          ),
+                          Text(
+                            lugar,
+                            style: temaApp(),
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            hora,
+
+                          ),
+                        ],
+                      );
+                    }
+                  ),
+                ),
+                SizedBox(width: 20),
+                Text(fecha),
+                SizedBox(width: 20),
+                Container(
+                  width: 1,
+                  margin: EdgeInsets.only(right: 8.0),
+                  decoration: BoxDecoration(
+                    color: Colors.black
+                  ),
+                ),
+                SizedBox(width: 9),
+                Container(
+                  margin: EdgeInsets.only(right: 8.0), // Margen agregado solo en la parte izquierda
+                  child: _huecosDisponibles(ocupados: ocupados)),
+                  
+                        ],
+                      ),
           ),
-          child: Row(   
-            children: [
-              Expanded(
-                child: StreamBuilder<Object>(
-                  stream: null,
-                  builder: (context, snapshot) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.center, // lo coloca en el centro
-                      children: [
-                        Text(centro),
-                        Text(lugar),
-                        SizedBox(height: 30),
-                        Text(hora),
-                      ],
-                    );
-                  }
-                ),
-              ),
-              SizedBox(width: 20),
-              Text(fecha),
-              SizedBox(width: 20),
-              Container(
-                width: 1,
-                margin: EdgeInsets.only(right: 8.0),
-                decoration: BoxDecoration(
-                  color: Colors.black
-                ),
-              ),
-              SizedBox(width: 9),
-              Container(
-                margin: EdgeInsets.only(right: 8.0), // Margen agregado solo en la parte izquierda
-                child: _huecosDisponibles(ocupados: ocupados)),
-                
-                      ],
-                    ),
         ),
       
       ],
     );
   }
+
+ 
 }
 
 

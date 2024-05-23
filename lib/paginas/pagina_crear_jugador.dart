@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:padel_proyecto/modelos/jugador.dart';
+import 'package:padel_proyecto/widgets/ThemeApp.dart';
 
 import '../widgets/boton_largo.dart';
-import '../widgets/logo.dart';
+
 import '../widgets/text_field.dart';
 import 'pagina_principal.dart';
 

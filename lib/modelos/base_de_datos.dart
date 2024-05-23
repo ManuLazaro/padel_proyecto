@@ -1,5 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 
+import 'usuario.dart';
+
 class DBHelper{
   static Database? _baseDatos;
   static const String _nombreFicheroBD = "padel.db";
@@ -48,11 +50,38 @@ class DBHelper{
           );
           //para añadir una segunda tabla
          await db.execute(
-           "CREATE TABLE  IF NOT EXISTS Pista (id INTEGER PRIMARY KEY, direccion TEXT, fecha text, nombrePista TEXT, hora TEXT, precio INTEGER, jugadores INTEGER, idJ1 INTEGER, idJ2 INTEGER, idJ3 INTEGER, idJ4 INTEGER)"
+           "CREATE TABLE  IF NOT EXISTS Pista (id INTEGER PRIMARY KEY,centroDeportivo TEXT, direccion TEXT, fecha text, nombrePista TEXT, hora TEXT, precio INTEGER, jugadores INTEGER, idJ1 INTEGER, idJ2 INTEGER, idJ3 INTEGER, idJ4 INTEGER)"
          );
          
       }
     );
     return baseDatos; // devolver la base de datos creada
   }
+
+// AUTENTIFICAR SI EL USUARIO EXISTE EN  LA BASE DE DATOS
+  Future<Usuario?> autenticar(String tabla, String login, String password) async { // PUEDE SER NULO
+  Database? db = await baseDatos;
+  List<Map<String, dynamic>> resultado = await db!.query(
+    tabla,
+    where: 'login = ? AND password = ?',
+    whereArgs: [login, password],
+  );
+  if (resultado.isNotEmpty) {
+    return Usuario.fromMap(resultado.first);
+  }
+  return null;
+}
+  // OBTENER ID 
+ Future<int?> obtenerId(String tabla, String campo, dynamic valor) async {
+  Database? db = await baseDatos;
+  List<Map<String, dynamic>> resultado = await db!.query(
+    tabla,
+    where: '$campo = ?',
+    whereArgs: [valor],
+  );
+  if (resultado.isNotEmpty) {
+    return resultado.first['id'] as int?;
+  }
+  return null;
+}
 }

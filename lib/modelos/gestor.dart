@@ -8,7 +8,7 @@ class Gestor extends Usuario{
   String direccion="";
   String telefonoContacto="";
   
-  
+
 
   //constructor
   Gestor() {
