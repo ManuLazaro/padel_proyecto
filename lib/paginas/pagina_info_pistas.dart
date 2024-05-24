@@ -20,17 +20,22 @@ class PaginasInfoPistas extends StatefulWidget {
 class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
   @override
   Widget build(BuildContext context) {
+
     final datos= Provider.of<Datos>(context);
+    String nombre = datos.usuarioActual.nombre;
+    int idUsuario = datos.usuarioActual.id;
+    Jugador jugador = Jugador(idUsuario);
+    
     String centro = 'Padel centro de valladolid';
     String lugar = 'Calle alguna de algo';
     String fecha = '12/12/2025';
     String hora = '12:00 - 13:00 ';
 
-    String nombre = datos.usuarioActual.nombre;
+    
     String nivel = 'Nivel amateur';
     int partidos = 23;
-    Jugador jugador = Jugador();
-
+    
+    
 
     return Scaffold(
       appBar: AppBar(

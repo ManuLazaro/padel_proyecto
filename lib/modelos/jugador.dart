@@ -3,74 +3,91 @@ import 'package:padel_proyecto/modelos/usuario.dart';
 
 class Jugador extends Usuario {
   
-  String nivel="";
-  int codigoPostal=0;
-  String telefono="";
-  late int usuarioId; //El id de usuario para poder pasarlo luego con el provider
+  late int _idJugador; 
+  String _nivel="";
+  int _codigoPostal=0;
+  String _telefono="";
+  late int _usuarioId; //El id de usuario para poder pasarlo luego con el provider
    
 
-  //constructor
-  Jugador() {
-    this.id = 0;
-    this.nivel = '';
-    this.codigoPostal = 0;
-    this.telefono = '';
-  }
-  //constructor sin id
-  Jugador.withoutId(this.usuarioId, this.nivel, this.codigoPostal, this.telefono);
+  // Constructor
+Jugador(int usuarioId) {
+  this._idJugador = 0;
+  this._nivel = '';
+  this._codigoPostal = 0;
+  this._telefono = '';
+  this._usuarioId = id;
+}
  
-  //constructor con map
+
+  //constructor sin id
+  Jugador.withoutId(this._nivel, this._codigoPostal, this._telefono, this._usuarioId);
+  //constructor con id
+  Jugador.withId(this._idJugador, this._nivel, this._codigoPostal, this._telefono, this._usuarioId);
+  // Constructor con map
   Jugador.fromMap(Map<String, dynamic> map) {
-    this.id = (map['id']!=null)?map['id']:null;
-    this.usuarioId = (map['usuarioId'] != null) ? map['usuarioId'] : null;
-    this.nivel = (map['nivel']!=null)?map['nivel']:'';
-    this.codigoPostal = (map['codigoPostal']!=null)?map['codigoPostal']:'';
-    this.telefono = (map['telefono']!=null)?map['telefono']:'';
+    this._idJugador = (map['idJugador'] != null) ? map['idJugador'] : null;
+    this._nivel = (map['nivel'] != null) ? map['nivel'] : '';
+    this._codigoPostal = (map['codigoPostal'] != null) ? map['codigoPostal'] : 0;
+    this._telefono = (map['telefono'] != null) ? map['telefono'] : '';
+    this._usuarioId = (map['usuarioId'] != null) ? map['usuarioId'] : null;
   }
   
-  //Getters y setters 
-  int? get _id => id;
-  String get _nivel => nivel;
-  int get _codigoPostal => codigoPostal;
-  String get _telefono => telefono;
+  // Getters y setters 
+  int? get idJugador => _idJugador;
+  String get nivel => _nivel;
+  int get codigoPostal => _codigoPostal;
+  String get telefono => _telefono;
+  int get usuarioId => _usuarioId;
   
-  set _nivel(String _nivel) {
-    this.nivel = _nivel;
+  set nivel(String nivel) {
+    this._nivel = nivel;
   }
-  set _codigoPostal(int _codigoPostal) {
-    this.codigoPostal = _codigoPostal;
+
+  set codigoPostal(int codigoPostal) {
+    this._codigoPostal = codigoPostal;
   }
-  set _telefono(String _telefono) {
-    this.telefono = _telefono;
+
+  set telefono(String telefono) {
+    this._telefono = telefono;
+  }
+
+  set usuarioId(int usuarioId) {
+    this._usuarioId = usuarioId;
   }
 
   Map<String, dynamic> toMap() {
     var map = Map<String, dynamic>();
-    if (_id != null) map['id'] = _id;
-    map['usuarioId'] = usuarioId;
-    map['nivel'] = nivel;
-    map['codigoPostal'] = codigoPostal;
-    map['telefono'] = telefono;
+    if (_idJugador != null) map['idJugador'] = _idJugador;
+    map['nivel'] = _nivel;
+    map['codigoPostal'] = _codigoPostal;
+    map['telefono'] = _telefono;
+    map['usuarioId'] = _usuarioId;
     return map;
   }
-// Obtener lista de pistas
-  Future<List<Jugador>> getJugadores(bool modoLocal)async{
-    List<Jugador> listaJugadores = []; // Inicializar lista vacía de pistas
-    Jugador jugador = new Jugador(); 
-    if(modoLocal){
-      // codigo conexion base de datos con sqlite
-      DBHelper dbHelper = DBHelper();
-      List<Map<String, dynamic>> jugadores = await dbHelper.consultarTabla("Jugador");
 
-      for(int i = 0; i< jugadores.length; i++){
-        jugador= Jugador.fromMap(jugadores[i]);
-        listaJugadores.add(jugador);
-      }
-    }else{
-      //codigo para la conexion con el API
+  // Obtener lista de jugadores
+Future<List<Jugador>> getJugadores(bool modoLocal) async {
+  List<Jugador> listaJugadores = []; // Inicializar lista vacía de jugadores
+  if (modoLocal) {
+    DBHelper dbHelper = DBHelper();
+    List<Map<String, dynamic>> jugadores = await dbHelper.consultarTabla("Jugador");
+
+    for (int i = 0; i < jugadores.length; i++) {
+      // Crear una nueva instancia de Jugador usando el constructor withId
+      Jugador jugador = Jugador.withId(
+        jugadores[i]['id'],
+        jugadores[i]['nivel'],
+        jugadores[i]['codigoPostal'],
+        jugadores[i]['telefono'],
+        jugadores[i]['usuarioId'],
+      );
+      listaJugadores.add(jugador);
     }
-    return listaJugadores;
+  } else {
+    // Código para la conexión con el API
   }
+  return listaJugadores;
 }
 
-
+}

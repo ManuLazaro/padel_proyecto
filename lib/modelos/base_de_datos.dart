@@ -1,3 +1,4 @@
+import 'package:padel_proyecto/modelos/jugador.dart';
 import 'package:sqflite/sqflite.dart';
 
 import 'usuario.dart';
@@ -36,6 +37,14 @@ class DBHelper{
     return resultado;
   }
 
+  // insertar n jugador pasando un parametro
+  Future<int> insertarJugador(Jugador jugador) async {
+  Database? db = await baseDatos;
+  var resultado = await db!.insert('Jugador', jugador.toMap());
+  return resultado;
+}
+
+
   // INICIALIZACION DE LA BASE DE DATOS
   _inicializarBD() async{
 
@@ -54,7 +63,7 @@ class DBHelper{
          );
         // para añadir una TERCERA tabla
          await db.execute(
-          "CREATE TABLE IF NOT EXISTS Jugador (id INTEGER PRIMARY KEY, usuarioId INTEGER, nivel TEXT, codigoPostal INTEGER, telefono TEXT)"
+          "CREATE TABLE IF NOT EXISTS Jugador (idJugador INTEGER PRIMARY KEY, nivel TEXT, codigoPostal INTEGER, telefono TEXT, usuarioId INTEGER)"
         );
       },
       readOnly: false, // La 3 tabla se crea como solo lectura asi que pongo esto para que no pase eso

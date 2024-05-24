@@ -23,14 +23,15 @@ class _PaginaCrearJugadorState extends State<PaginaCrearJugador> {
   String botonRegistro = 'Registrarse ahora';
   Color colorVerde = Color.fromARGB(255, 29, 88, 29);
   final _formkey=GlobalKey<FormState>();
-  Jugador nuevoJugador=Jugador();
+  
 
   @override
 Widget build(BuildContext context) {
    
   final datos = Provider.of<Datos>(context);
   int idUsuario = datos.usuarioActual.id;
-
+  Jugador nuevoJugador=Jugador(idUsuario);
+  
   return Scaffold(
     appBar: AppBar(
       title: Text(
@@ -183,12 +184,11 @@ Widget build(BuildContext context) {
                   ////////////////////////// BOTON////////////////////////////////
                   ElevatedButton( 
                     onPressed: () {
-                      if(_formkey.currentState!.validate())
-                      {
+                      if(_formkey.currentState!.validate()) {
                         _formkey.currentState!.save();
                         DBHelper dbHelper = DBHelper();
                         nuevoJugador.usuarioId = idUsuario; 
-                        dbHelper.insertarTabla('Jugador', nuevoJugador.toMap()).then((id) {
+                        dbHelper.insertarJugador(nuevoJugador).then((id) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(

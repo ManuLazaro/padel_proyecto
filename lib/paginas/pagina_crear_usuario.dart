@@ -69,7 +69,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                     
                     },
                   ), 
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 10.0),
                   ////////////////////////// LABEL NOMBRE ////////////////////////////////
                   TextFormField(
                     style: TextStyle(color: Colors.white), // Color del texto del usuario
@@ -99,7 +99,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
 
                     },
                   ), 
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 10.0),
                   ////////////////////////// label APELLIDOS////////////////////////////////
                  TextFormField(
                     style: TextStyle(color: Colors.white), // Color del texto del usuario
@@ -128,7 +128,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                       }
                     },
                   ), 
-                  SizedBox(height: 20.0), 
+                  SizedBox(height: 10.0), 
                   ////////////////////////// LABEL FECHA////////////////////////////////
                  TextFormField(
                     keyboardType: TextInputType.datetime,
@@ -175,7 +175,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                   }
                 },
                   ),                  
-                  SizedBox(height: 20.0),
+                  SizedBox(height: 10.0),
                   ////////////////////////// LABEL ROL ////////////////////////////////
                   DropdownButtonFormField<String>(          
                     decoration: InputDecoration(
@@ -215,7 +215,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                       }
                     },
                   ),
-                  SizedBox(height: 20.0), 
+                  SizedBox(height: 10.0), 
                   ////////////////////////// LABEL PASSWORD ////////////////////////////////
                  TextFormField(
                     style: TextStyle(color: Colors.white), // Color del texto del usuario
@@ -246,7 +246,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                       }
                     },
                   ),
-                  SizedBox(height: 20.0), 
+                  SizedBox(height: 10.0), 
                   ////////////////////////// LABEL REPETIR CONTRASEÑA ////////////////////////////////
                    TextFormField(
                             style: TextStyle(color: Colors.white), // Color del texto del usuario
@@ -300,7 +300,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                         }
                       },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Color.fromARGB(255, 77, 185, 69), 
+                backgroundColor: Color.fromARGB(255, 26, 94, 21), 
                 shape: RoundedRectangleBorder( // forma de rectangulo
                   borderRadius: BorderRadius.circular(5.0), 
                 ),
