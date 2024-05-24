@@ -80,7 +80,7 @@ class Usuario {
     if(modoLocal){
       // codigo conexion base de datos con sqlite
       DBHelper dbHelper = DBHelper();
-      List<Map<String, dynamic>> usuarios = await dbHelper.consultarTabla("usuarios");
+      List<Map<String, dynamic>> usuarios = await dbHelper.consultarTabla("usuario");
 
       for(int i = 0; i< usuarios.length; i++){
         usuario = Usuario.fromMap(usuarios[i]);

@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:padel_proyecto/modelos/jugador.dart';
 import 'package:padel_proyecto/provider/datos_usuario.dart';
 import 'package:padel_proyecto/rutas/rutas.dart';
+import 'package:padel_proyecto/widgets/ThemeApp.dart';
 import 'package:padel_proyecto/widgets/cuadro_pistas.dart';
 import 'package:padel_proyecto/widgets/menu_lateral.dart';
 import 'package:padel_proyecto/widgets/barra_navegacion.dart';
@@ -27,6 +29,8 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
     String nombre = datos.usuarioActual.nombre;
     String nivel = 'Nivel amateur';
     int partidos = 23;
+    Jugador jugador = Jugador();
+
 
     return Scaffold(
       appBar: AppBar(
@@ -46,9 +50,30 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
       body: ListView(
         children: [
           cuadroInformacionPista(),
+          Expanded(
+          child: FutureBuilder(
+                future: jugador.getJugadores(true),
+                builder: (context, AsyncSnapshot<List<Jugador>> snapshot) {
+                  if(snapshot.hasData){
+                    print(snapshot.data!.length);
+                    return ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context,index){
+                        return 
+                          cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos);
+                      });
+                  }
+                  else{
+                    return Center(child: Text("cargando"),);
+                  }
+                },
+            ),
+        ),
           cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos),     
           SizedBox(height: 10),
-          Container(
+
+          
+          Container( ///// BOTON RESERVAR
             margin: EdgeInsets.symmetric(horizontal: 110),
             child: ElevatedButton( 
                           onPressed: () {
@@ -63,10 +88,7 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
                             child: Text(
                               'Reservar',
                               textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold, 
-                                color: Colors.white,
-                              ),
+                              style: temaBoton(),
                             ),
                           ),
                ),
@@ -79,5 +101,7 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
       backgroundColor: Color.fromARGB(255, 203, 216, 203),
     );
   }
+
+  
 }
 

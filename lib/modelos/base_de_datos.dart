@@ -48,12 +48,16 @@ class DBHelper{
         await db.execute(
           'CREATE TABLE if not exists Usuario(id INTEGER PRIMARY KEY, login text, nombre text, apellidos text, fechaDeNacimiento text, password text, rol INTEGER)'
           );
-          //para añadir una segunda tabla
+          //para añadir una segunda tabla  
          await db.execute(
            "CREATE TABLE  IF NOT EXISTS Pista (id INTEGER PRIMARY KEY,centroDeportivo TEXT, direccion TEXT, fecha text, nombrePista TEXT, hora TEXT, precio INTEGER, jugadores INTEGER, idJ1 INTEGER, idJ2 INTEGER, idJ3 INTEGER, idJ4 INTEGER)"
          );
-         
-      }
+        // para añadir una TERCERA tabla
+         await db.execute(
+          "CREATE TABLE IF NOT EXISTS Jugador (id INTEGER PRIMARY KEY, usuarioId INTEGER, nivel TEXT, codigoPostal INTEGER, telefono TEXT)"
+        );
+      },
+      readOnly: false, // La 3 tabla se crea como solo lectura asi que pongo esto para que no pase eso
     );
     return baseDatos; // devolver la base de datos creada
   }

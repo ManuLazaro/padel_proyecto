@@ -61,7 +61,11 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
                   SizedBox(height: 5.0),
                   Text(  // texto
                     'Padel',
-                    style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold, 
+                      color: Colors.white,
+                      fontSize: 35,        
+                    ),
                   ),
                   SizedBox(height: 10.0),
                   Expanded(
@@ -124,7 +128,7 @@ class _PaginaInicioSesionState extends State<PaginaInicioSesion> {
                               }
                             },
                           ),                     
-                          SizedBox(height: 20.0),
+                          SizedBox(height: 50.0),
                           ElevatedButton( //BOTON 1
                             onPressed: () async // asincona para poder poner el await
                             { 

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:padel_proyecto/modelos/base_de_datos.dart';
 import 'package:padel_proyecto/modelos/jugador.dart';
+import 'package:padel_proyecto/provider/datos_usuario.dart';
 import 'package:padel_proyecto/widgets/ThemeApp.dart';
+import 'package:provider/provider.dart';
 
-import '../widgets/boton_largo.dart';
-
-import '../widgets/text_field.dart';
 import 'pagina_principal.dart';
 
 class PaginaCrearJugador extends StatefulWidget {
@@ -17,7 +17,7 @@ class PaginaCrearJugador extends StatefulWidget {
 }
 
 class _PaginaCrearJugadorState extends State<PaginaCrearJugador> {
-   
+  
    
   String texto= "";
   String botonRegistro = 'Registrarse ahora';
@@ -27,6 +27,10 @@ class _PaginaCrearJugadorState extends State<PaginaCrearJugador> {
 
   @override
 Widget build(BuildContext context) {
+   
+  final datos = Provider.of<Datos>(context);
+  int idUsuario = datos.usuarioActual.id;
+
   return Scaffold(
     appBar: AppBar(
       title: Text(
@@ -181,16 +185,18 @@ Widget build(BuildContext context) {
                     onPressed: () {
                       if(_formkey.currentState!.validate())
                       {
-                          _formkey.currentState!.save();
-                          
-                          
+                        _formkey.currentState!.save();
+                        DBHelper dbHelper = DBHelper();
+                        nuevoJugador.usuarioId = idUsuario; 
+                        dbHelper.insertarTabla('Jugador', nuevoJugador.toMap()).then((id) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => PaginaPrincipal(),
                             ),
                           );
-                      }           
+                        });
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: colorVerde, 

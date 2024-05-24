@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:padel_proyecto/modelos/base_de_datos.dart';
 import 'package:padel_proyecto/modelos/usuario.dart';
+import 'package:padel_proyecto/provider/datos_usuario.dart';
 import 'package:padel_proyecto/widgets/ThemeApp.dart';
+import 'package:provider/provider.dart';
 import '../widgets/boton_largo.dart';
 import '../widgets/text_field.dart';
 import 'pagina_crear_jugador.dart';
@@ -16,16 +18,14 @@ class PaginaEleccion extends StatefulWidget {
 }
 
 class _PaginaEleccionState extends State<PaginaEleccion> {
-  
-  String botonRegistro = 'Registrarse ahora';
-  Color colorVerde = Color.fromARGB(255, 29, 88, 29);
+
   final _formkey=GlobalKey<FormState>();
   Usuario nuevoUsuario=Usuario();
 
   @override
   Widget build(BuildContext context) {
+   
     String passTemp ="";
-
     return Scaffold(
      body: Container(
       color: Color.fromARGB(255, 77, 185, 69),
@@ -36,13 +36,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
           children: [
            PistaPadel(), //logo fuera del ListView
              SizedBox(height: 5.0),
-                  const Text(  // texto
-                    'Padel',
-                    style: TextStyle(
-                      fontSize: 40.0,
-                      color: Colors.white,
-                    ),
-                  ),
+  
             Expanded( // Expanded para el ListView
               child: ListView( 
                 children: [    
@@ -72,6 +66,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                       {
                         nuevoUsuario.login=value;
                       }
+                    
                     },
                   ), 
                   SizedBox(height: 20.0),
@@ -101,6 +96,7 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
                       {
                         nuevoUsuario.nombre=value;
                       }
+
                     },
                   ), 
                   SizedBox(height: 20.0),
@@ -286,38 +282,40 @@ class _PaginaEleccionState extends State<PaginaEleccion> {
             ////////////////////////// BOTON//////////////////////////////// 
              SizedBox(height: 30.0), 
             ElevatedButton( 
-                    onPressed: () {
-                      if(_formkey.currentState!.validate())
-                      {
+              onPressed: () {
+                        if (_formkey.currentState!.validate()) {
                           _formkey.currentState!.save();
-                          DBHelper dbHelper = new DBHelper();
-                          dbHelper.insertarTabla('usuario', nuevoUsuario.toMap());
-
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PaginaCrearJugador(),
-                            ),
-                          );
-                      }           
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: colorVerde, 
-                      shape: RoundedRectangleBorder( // forma de rectangulo
-                        borderRadius: BorderRadius.circular(5.0), 
-                      ),
-                    ),
-                    child: SizedBox( // una caja dentro para darle forma
-                      width: double.infinity,// ocuoa todo lo ancho
-                      child: Text(
-                        botonRegistro,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),  
-                  ) 
+                          DBHelper dbHelper = DBHelper();
+                          dbHelper.insertarTabla('Usuario', nuevoUsuario.toMap()).then((id) {
+                            nuevoUsuario.id = id;
+                            // Usar el provider para almacenar el usuario actual
+                            Provider.of<Datos>(context, listen: false).usuarioActual = nuevoUsuario;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PaginaCrearJugador(),
+                              ),
+                            );
+                          });
+                        }
+                      },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color.fromARGB(255, 77, 185, 69), 
+                shape: RoundedRectangleBorder( // forma de rectangulo
+                  borderRadius: BorderRadius.circular(5.0), 
+                ),
+              ),
+              child: SizedBox( // una caja dentro para darle forma
+                width: double.infinity,// ocuoa todo lo ancho
+                child: Text(
+                  'Registrarse ahora',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),  
+            ) 
             
           ],
         ),

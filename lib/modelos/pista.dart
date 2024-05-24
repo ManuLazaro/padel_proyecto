@@ -41,7 +41,7 @@ class Pista {
     this._fecha = DateTime.parse(map['fecha']);
     this._nombrePista = (map['nombrePista']!=null)?map['nombrePista']:'';
     this._hora = (map['hora']!=null)?map['hora']:'';
-    this._precio = (map['precio']!=null)?map['precio']:'';
+    this._precio = (map['precio']!=null)?map['precio']:0;
     this._jugadores = (map['jugadores']!=null)?map['jugadores']:'';
     this._idJ1 = (map['idJ1']!=null)?map['idJ1']:'';
     this._idJ2 = (map['idJ2']!=null)?map['idJ2']:'';

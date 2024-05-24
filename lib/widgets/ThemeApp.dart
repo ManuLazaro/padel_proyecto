@@ -118,4 +118,18 @@ TextStyle temaApp() {
         ],
         );
   }
+  TextStyle temaBoton() {
+    return TextStyle(
+      fontWeight: FontWeight.bold, 
+      color: Colors.white,
+      fontSize: 20, 
+      shadows: [
+          Shadow(
+            color: Color.fromARGB(174, 59, 59, 59).withOpacity(1), 
+            offset: Offset(0.1, 0.1), 
+            blurRadius: 5, 
+          ),
+        ],
+      );
+  }
 
