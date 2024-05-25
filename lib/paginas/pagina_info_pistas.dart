@@ -60,8 +60,7 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context,index){
-                        return 
-                          cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos);
+                       return cuadroJugadores(nombre: snapshot.data![index].nombre, nivel: snapshot.data![index].nivel, partidos:2);
                       });
                   }
                   else{
@@ -70,7 +69,8 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
                 },
             ),
         ),
-        //  cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos),     
+       
+          cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos),     
           SizedBox(height: 10),
 
           Container( ///// BOTON RESERVAR
