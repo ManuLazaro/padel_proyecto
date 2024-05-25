@@ -4,11 +4,13 @@ import 'package:flutter/widgets.dart';
 import 'package:padel_proyecto/modelos/pista.dart';
 import 'package:padel_proyecto/paginas/pagina_crear_pistas.dart';
 import 'package:padel_proyecto/paginas/pagina_info_pistas.dart';
+import 'package:padel_proyecto/provider/datos_usuario.dart';
 import 'package:padel_proyecto/rutas/rutas.dart';
 import 'package:padel_proyecto/widgets/ThemeApp.dart';
 import 'package:padel_proyecto/widgets/cuadro_pistas.dart';
 import 'package:padel_proyecto/widgets/menu_lateral.dart';
 import 'package:padel_proyecto/widgets/barra_navegacion.dart';
+import 'package:provider/provider.dart';
 
 class PaginaPrincipal extends StatefulWidget {
   const PaginaPrincipal({Key? key}) : super(key: key);
@@ -18,14 +20,10 @@ class PaginaPrincipal extends StatefulWidget {
 }
 
 class _PaginaPrincipalState extends State<PaginaPrincipal> {
-  Pista pista = new Pista();
   @override
   Widget build(BuildContext context) {
-    String centro = 'Padel centro de valladolid';
-    String lugar = 'Calle alguna de algo';
-    String fecha = '12/12/2025';
-    String hora = '12:00 - 13:00 ';
-
+    final datosPista = Provider.of<Datos>(context);
+    Pista pista = new Pista();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -91,6 +89,7 @@ class _PaginaPrincipalState extends State<PaginaPrincipal> {
                     return ListView.builder(
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context,index){
+                         Provider.of<Datos>(context, listen: false).pistaSeleccionada = snapshot.data![index];
                         return cuadroPistas(centro: snapshot.data![index].centroDeportivo, lugar: snapshot.data![index].direccion, hora: "Hora de entrada: "+snapshot.data![index].hora, fecha: snapshot.data![index].fecha.toString().substring(0,10), ocupados: snapshot.data![index].jugadores);
                       });
                   }

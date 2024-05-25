@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:padel_proyecto/modelos/pista.dart';
 
 import 'package:padel_proyecto/paginas/pagina_info_mis_reservas.dart';
 import 'package:padel_proyecto/paginas/pagina_info_pistas.dart';
 import 'package:padel_proyecto/widgets/ThemeApp.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/datos_usuario.dart';
 
 
 class cuadroPistas extends StatelessWidget {
@@ -15,6 +19,7 @@ class cuadroPistas extends StatelessWidget {
     required this.hora,
     required this.fecha,
     required this.ocupados,
+    //required this.pista,
   }) : super(key: key);
 
   final String centro;
@@ -22,9 +27,11 @@ class cuadroPistas extends StatelessWidget {
   final String hora;
   final String fecha;
   final int ocupados;
-
+//  final Pista pista;
   @override
   Widget build(BuildContext context) {
+    final datosPista = Provider.of<Datos>(context);
+    Pista pista = new Pista();
     return 
     Stack(
       children: [
@@ -70,6 +77,7 @@ class cuadroPistas extends StatelessWidget {
         ////////////////////////////////////////////////////////////////////
         GestureDetector(
           onTap: () {
+        //    datosPista.pistaSeleccionada = pista; // info de la pista
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => PaginasInfoPistas()),
@@ -530,6 +538,12 @@ class cuadroInformacionPista extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pistaSeleccionada = Provider.of<Datos>(context).pistaSeleccionada;
+    // DateTime fecha = datos.pistaSeleccionada.fecha;
+    // String centroDeportivo = datos.pistaSeleccionada.centroDeportivo;
+    // String hora = datos.pistaSeleccionada.hora; 
+    
+
     return Container(
     padding: EdgeInsets.all(6.0), // Sirve para dar espacio por dentro 
     margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 4.0), 
@@ -551,20 +565,21 @@ class cuadroInformacionPista extends StatelessWidget {
         ),
       ),
     ),
-        child: const Column(
+        child:  Column(
           children: [
             SizedBox(height: 10),
             Row( // fila 1
               children: [
                 Expanded(
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text('30/12/2024'),
-                      SizedBox(width: 20),
-                      Text('12:00 - 13:00 '),
-                      SizedBox(width: 20),
-                      Text('Centro de Padel Valladolid'),
+                      SizedBox(width: 10),
+                      Text(pistaSeleccionada.fecha.toString().substring(0, 10)),
+                      SizedBox(width: 40),
+                      Text(pistaSeleccionada.hora+ " AM "),
+                      SizedBox(width: 40),
+                      Text(pistaSeleccionada.centroDeportivo),
                       
                     ],
                   ),
@@ -580,8 +595,8 @@ class cuadroInformacionPista extends StatelessWidget {
                   Icon(Icons.person, size: 35, color: Color.fromARGB(255, 77, 185, 69)),
                   SizedBox(width: 10),
                   Icon(Icons.person, size: 35, color: Color.fromARGB(255, 58, 49, 49),),
-                  SizedBox(width: 50),
-                  Text('Nivel amateur'),
+                  SizedBox(width: 120),
+                  Text("Pista numero: "+pistaSeleccionada.nombrePista),
                 ],
               ),
             ),

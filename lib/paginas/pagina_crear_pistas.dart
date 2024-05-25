@@ -255,6 +255,7 @@ Widget build(BuildContext context) {
               onPressed: () {
                 if(_formkey.currentState!.validate())
                 {
+
                     _formkey.currentState!.save();
                     //insertar en base de datos 
                     DBHelper dbHelper = new DBHelper();

@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:padel_proyecto/modelos/base_de_datos.dart';
 import 'package:padel_proyecto/modelos/jugador.dart';
+import 'package:padel_proyecto/paginas/pagina_principal.dart';
 import 'package:padel_proyecto/provider/datos_usuario.dart';
 import 'package:padel_proyecto/rutas/rutas.dart';
 import 'package:padel_proyecto/widgets/ThemeApp.dart';
@@ -24,13 +26,9 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
     final datos= Provider.of<Datos>(context);
     String nombre = datos.usuarioActual.nombre;
     int idUsuario = datos.usuarioActual.id;
-    Jugador jugador = Jugador(idUsuario);
-    
-    String centro = 'Padel centro de valladolid';
-    String lugar = 'Calle alguna de algo';
-    String fecha = '12/12/2025';
-    String hora = '12:00 - 13:00 ';
 
+    int jugadoresTotales = datos.pistaSeleccionada.jugadores;
+    Jugador jugador = Jugador(idUsuario);
     
     String nivel = 'Nivel amateur';
     int partidos = 23;
@@ -41,9 +39,7 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
       appBar: AppBar(
         title: Text(
           'INFORMACION DE LA PISTA', 
-          style: TextStyle(
-            color: const Color.fromARGB(255, 255, 255, 255),
-          ),
+          style: temaAppBar(),
         ),
         flexibleSpace: Container(
           decoration: BoxDecoration(
@@ -69,19 +65,27 @@ class _PaginasInfoPistasState extends State<PaginasInfoPistas> {
                       });
                   }
                   else{
-                    return Center(child: Text("cargando"),);
+                    return Center(child: Text(""),);
                   }
                 },
             ),
         ),
-          cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos),     
+        //  cuadroJugadores(nombre: nombre, nivel: nivel, partidos: partidos),     
           SizedBox(height: 10),
 
-          
           Container( ///// BOTON RESERVAR
             margin: EdgeInsets.symmetric(horizontal: 110),
             child: ElevatedButton( 
-                          onPressed: () {
+                          onPressed: () async{   
+                            // sumamos 1 jugador
+                            int nuevosJugadores = jugadoresTotales + 1;
+                            await DBHelper().actualizarPista(1, nuevosJugadores);
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaginaPrincipal(),
+                            ),
+                        );
                           },
                           style: ElevatedButton.styleFrom( 
                             backgroundColor: Color.fromARGB(255, 77, 185, 69),

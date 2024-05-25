@@ -51,7 +51,7 @@ class Pista {
   
   //Getters y setters 
   int? get id => _id;
-   String get centroDeportivo => _centroDeportivo;
+  String get centroDeportivo => _centroDeportivo;
   String get direccion => _direccion;
   DateTime get fecha => _fecha;
   String get nombrePista => _nombrePista;

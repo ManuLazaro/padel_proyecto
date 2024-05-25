@@ -43,7 +43,14 @@ class DBHelper{
   var resultado = await db!.insert('Jugador', jugador.toMap());
   return resultado;
 }
-
+ // actualizar la pista 
+  Future<void> actualizarPista(int pistaId, int nuevosJugadores) async {
+    Database? db = await baseDatos;
+    await db!.rawUpdate(
+      'UPDATE Pista SET jugadores = ? WHERE id = ?',
+      [nuevosJugadores, pistaId],
+    );
+  }
 
   // INICIALIZACION DE LA BASE DE DATOS
   _inicializarBD() async{
